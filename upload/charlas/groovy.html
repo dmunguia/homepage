@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="es">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>De Java a Groovy</title>
+
+		<meta name="description" content="De Java a Groovy">
+		<meta name="author" content="Diego Munguía">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.min.css">
+      <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/theme/night.css" id="theme">
+		<link rel="stylesheet" href="groovy/custom.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="groovy/googlecode.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>De Java a Groovy</h1>
+				</section>
+
+				<section>
+					<section>
+						<h3>Groovy</h3>
+						<ul>
+							<li>JVM</li>
+							<li>compilado / interpretado</li>
+							<li>OO - todo es un objeto!</li>
+							<li>tipos dinámicos y estáticos</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Integración con Java</h3>
+						<ul>
+							<li>Clases de Java en Groovy y viceversa</li>
+							<li>Sintáxis alineada</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+import java.util.*;
+
+public class Prueba {
+    public static void main(String[] args) {
+        Date hoy = new Date();
+        System.out.println(hoy);
+    }
+}							
+						</code></pre>
+						<pre><code data-trim contenteditable class="groovy">
+def hoy = new Date()
+println(hoy)
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<h3>imports por defecto</h3>
+						<pre><code data-trim contenteditable class="groovy">
+java.io.*
+java.lang.*
+java.math.BigDecimal
+java.math.BigInteger
+java.net.*
+java.util.*
+groovy.lang.*
+groovy.util.*
+						</code></pre>
+				</section>
+
+				<section>
+					<h3>Todo es un objeto</h3>
+						<pre><code data-trim contenteditable class="groovy">
+assert 1.toString() == '1'							
+						</code></pre>
+				</section>
+
+				<section>
+					<h3>BigDecimal</h3>
+						<pre><code data-trim contenteditable class="groovy">
+assert 1.1 + 0.1 == 1.2
+// java: 1.1 + 0.1 == 1.2000000000000002
+						</code></pre>
+				</section>
+
+				<section>
+					<h3>Hileras</h3>
+						<pre><code data-trim contenteditable class="groovy">
+def h1 = 'hola mundo!'
+def h2 = "3 + 5 = ${3 + 5}"
+def h3 = "la var h1 contiene ${h1} y su largo es ${h1.length()}"
+def h4 = ''' esta es una
+hilera
+multilinea'''
+						</code></pre>
+				</section>
+
+				<section>
+					<section>
+						<h3>Colecciones como tipos nativos</h3>
+							<pre><code data-trim contenteditable class="groovy">
+def listaVacia = []
+def lista = [1, 2, 3]
+assert lista[0] == 1
+
+def conjunto = [1, 2, 3, 1, 2, 3] as Set
+assert conjunto.size() == 3
+
+def mapaVacío = [:]
+def mapa = [200:'OK', 404:'NOT_FOUND', 500:'INTERNAL_SERVER_ERROR']
+assert mapa[200] == 'OK'
+
+def usuario = [id: 3, usr: 'miusuario']
+assert usuario.id == 3
+							</code></pre>
+					</section>
+					<section>
+						<h3>Colecciones como tipos nativos</h3>
+							<pre><code data-trim contenteditable class="groovy">
+def rango = 1..10
+assert rango.from == 1
+assert rango.to == 10
+
+def rango2 = 10..1
+def rango3 = -7..7
+def rango4 = 0..&lt;10
+def rango5 = 'a'..'z'
+							</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<h3>Igualdad e identidad</h3>
+						<pre><code data-trim contenteditable class="groovy">
+def a = [1, 2, 3]
+def b = [1, 2, 3]
+def c = a
+
+assert a == b
+assert a.is(c)
+						</code></pre>
+				</section>
+
+				<section>
+					<section>
+						<h3>POGOs</h3>
+						<pre><code data-trim contenteditable class="groovy">
+class Metadata {
+    Long id
+    String title
+    List&lt;String&gt; keywords        
+}
+
+Metadata m1 = new Metadata(id: 1, 
+						  title: 'Mamita Yunai', 
+						  keywords: ['novela', 'caribe'])
+
+Metadata m2 = new Metadata(title: 'Marcos Ramírez', id: 2)
+
+assert m1.title == 'Mamita Yunai'
+assert m2.title == 'Marcos Ramírez'
+						</code></pre>
+					</section>
+					<section>
+						<h3>POGOs</h3>
+						<pre><code data-trim contenteditable class="groovy">
+import groovy.transform.*
+
+@ToString
+class Metadata {
+    Long id
+    String title
+    List&lt;String&gt; keywords        
+}
+
+Metadata m = new Metadata(id: 1, 
+						  title: 'Mamita Yunai', 
+						  keywords: ['novela', 'caribe'])
+
+assert m.toString() == 'Metadata(1, Mamita Yunai, [novela, caribe])'
+						</code></pre>
+					</section>
+					<section>
+						<h3>POGOs</h3>
+						<pre><code data-trim contenteditable class="groovy">
+import groovy.transform.*
+
+@EqualsAndHashCode
+class Metadata {
+    Long id
+    String title
+    List&lt;String&gt; keywords        
+}
+
+Metadata m1 = new Metadata(id: 1, 
+						   title: 'Mamita Yunai', 
+						   keywords: ['novela', 'caribe'])
+Metadata m2 = new Metadata(id: 1, 
+						   title: 'Mamita Yunai', 
+						   keywords: ['novela', 'caribe'])
+assert m1 == m2
+assert !m1.is(m2)
+						</code></pre>
+					</section>
+					<section>
+						<h3>POGOs</h3>
+						<pre><code data-trim contenteditable class="groovy">
+import groovy.transform.*
+
+@TupleConstructor
+class Metadata {
+    Long id
+    String title
+    List&lt;String&gt; keywords        
+}
+
+Metadata m = new Metadata(1, 'Mamita Yunai', ['novela', 'caribe'])
+assert m.title == 'Mamita Yunai'
+						</code></pre>
+					</section>
+					<section>
+						<h3>POGOs</h3>
+						<pre><code data-trim contenteditable class="groovy">
+import groovy.transform.*
+
+@ToString
+@EqualsAndHashCode
+@TupleConstructor
+class Metadata {
+    Long id
+    String title
+    List&lt;String&gt; keywords        
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>POGOs</h3>
+						<pre><code data-trim contenteditable class="groovy">
+import groovy.transform.*
+
+@Canonical
+class Metadata {
+    Long id
+    String title
+    List&lt;String&gt; keywords        
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>POJO</h3>
+						<pre><code data-trim contenteditable class="groovy">
+import java.util.List;
+
+public class Metadata {
+    private Long id;
+    private String title;
+    private List&lt;String&gt; keywords;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List&lt;String&gt; getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(List&lt;String&gt; keywords) {
+        this.keywords = keywords;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Metadata metadata = (Metadata) o;
+
+        if (id != null ? !id.equals(metadata.id) : metadata.id != null) return false;
+        if (keywords != null ? !keywords.equals(metadata.keywords) : metadata.keywords != null) return false;
+        if (title != null ? !title.equals(metadata.title) : metadata.title != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (keywords != null ? keywords.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Metadata{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", keywords=" + keywords +
+                '}';
+    }
+
+
+}
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<h3>Expresiones regulares</h3>
+						<pre><code data-trim contenteditable class="groovy">
+def matcher = '1 uno, 2 dos, 3 tres' =~ /\d+/
+assert matcher[1] == '2'
+assert '1 uno, 2 dos, 3 tres' ==~ /\d+/
+
+def s = 'x=y'.replaceAll(/([a-z])=([a-z])/, '$2=$1')
+assert s == 'y=x'
+						</code></pre>
+				</section>
+
+				<section>
+					<h3>switch</h3>
+						<pre><code data-trim contenteditable class="groovy">
+switch(x) {
+	case Number: println('number'); break
+	case /uno/: println('en regex'); break
+	case [1]: println('en lista'); break
+	case 1..&lt;2: println('en rango'); break
+	case 1: println('int'); break
+	case 1.5: println('float'); break
+	case 'uno': println('string'); break
+	default: println('ninguno')
+}
+						</code></pre>
+				</section>
+
+				<section>
+					<h3>navegación segura</h3>
+						<pre><code data-trim contenteditable class="groovy">
+class A { B b }
+class B { C c }
+class C { int x }
+
+C c = new C(x: 1)
+B b = new B(c: c)
+A a = new A(b: b)
+
+int i;
+if (a != null &amp;&amp; a.b != null &amp;&amp; a.b.c != null) {
+	i = a.b.c.x
+}
+
+int j = a?.b?.c?.x
+						</code></pre>
+				</section>
+
+				<section>
+					<section>
+						<h3>clausuras</h3>
+						<ul>
+							<li>Funciones como valores de primera clase</li>
+							<li>Tienen acceso al scope de donde fueron declaradas</li>
+						</ul>
+					</section>
+					<section>
+						<h3>clausuras</h3>
+						<pre><code data-trim contenteditable class="groovy">
+def constante = { 1 }
+assert constante() == 1							
+
+def inc = { x -> x + 1}
+assert inc(1) == 2
+						</code></pre>
+					</section>
+					<section>
+						<h3>clausuras</h3>
+						<pre><code data-trim contenteditable class="groovy">
+def metodo(int a) {
+	int b = a * 2
+	return { c -> a + b + c }
+}							
+
+def clausura = metodo(2)
+assert clausura(4) == 10
+						</code></pre>
+					</section>
+					<section>
+						<h3>clausuras</h3>
+						<pre><code data-trim contenteditable class="groovy">
+def aplicar(clausura, lista) {
+    def nueva = []
+    for (e in lista) {
+        nueva &lt;&lt; clausura(e)
+    }
+    return nueva
+}							
+
+assert aplicar({x -> x + 1}, [1,2,3]) == [2,3,4]
+						</code></pre>
+					</section>
+					<section>
+						<h3>clausuras</h3>
+						<pre><code data-trim contenteditable class="groovy">
+[1, 2, 3].each {
+	println("Elemento ${it}")
+}							
+
+[1, 2, 3].each { e ->
+	println("Elemento ${e}")
+}							
+
+[1, 2, 3].eachWithIndex { e, i ->
+	println("elemento ${e} en pos $i")
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>clausuras</h3>
+						<pre><code data-trim contenteditable class="groovy">
+assert ['HOLA', 'ADIOS']*.toLowerCase() == ['hola', 'adios']
+
+assert ['HOLA', 'ADIOS'].collect { it.toLowerCase() } == ['hola', 'adios']
+
+def l = ['HOLA', 'ADIOS'].collect { 
+	it.toLowerCase().capitalize() 
+}
+
+assert l == ['Hola', 'Adios']
+
+						</code></pre>
+					</section>
+					<section>
+						<h3>clausuras</h3>
+						<pre><code data-trim contenteditable class="groovy">
+assert [1, 2, 3].find { it > 1 } == 2
+
+assert [1, 2, 3].findAll { it > 1 } == [2, 3]
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>markup</h3>
+						<pre><code data-trim contenteditable class="groovy">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;pizarra&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;canvas id="pizarra"&gt;&lt;/canvas&gt;
+        &lt;div id="botones"&gt;
+            &lt;div class="boton" id="blanco"&gt;&lt;/div&gt;
+            &lt;div class="boton" id="rojo"&gt;&lt;/div&gt;
+            &lt;div class="boton" id="negro"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+						</code></pre>
+					</section>
+					<section>
+						<h3>markup</h3>
+						<pre><code data-trim contenteditable class="groovy">
+import groovy.xml.*
+
+def html = new XmlSlurper().parse('pizarra.html')
+assert html.head.title == 'pizarra'
+def botones = html.depthFirst().findAll { it.@class == 'boton' }
+assert botones.collect { it.@id } == ['blanco', 'rojo', 'negro']							
+						</code></pre>
+					</section>
+					<section>
+						<h3>markup</h3>
+						<pre><code data-trim contenteditable class="java">
+import groovy.xml.*
+
+def html = StreamingMarkupBuilder().bind {
+    html {
+        head {}
+        body {
+            div(id: 'main', class: 'header', 'data-internal-id': '100') {
+                h1('Hola mundo!')
+            }
+        }
+    }
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>markup</h3>
+						<pre><code data-trim contenteditable class="groovy">
+import groovy.json.*
+
+def json = new JsonBuilder()
+
+json.metadata {
+    titulo 'Mamita Yunai'
+    autor 'Carlos Luis Fallas'
+    etiquetas 'novela', 'caribe'
+}
+
+def jsonString = json.toPrettyString()
+def objetoJson = new JsonSlurper().parseText(jsonString)
+assert objetoJson.metadata.etiquetas[1] == 'caribe'
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<h3>SQL</h3>
+					<pre><code data-trim contenteditable class="groovy">
+@Grab('org.hsqldb:hsqldb:2.3.2')
+import groovy.sql.*
+
+def sql = Sql.newInstance('jdbc:hsqldb:mem:sampledb', 'sa', '', 'org.hsqldb.jdbcDriver')
+
+sql.execute('insert into user values(:id, :creationDate, :username, :password)', user)
+
+sql.eachRow('select * from user') { row ->
+    println("Username = ${row.username}, Password = ${row.password}")
+}
+
+					</code></pre>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="http://lab.hakim.se/reveal-js/lib/js/head.min.js"></script>
+		<script src="http://lab.hakim.se/reveal-js/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'http://lab.hakim.se/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { 
+							hljs.initHighlightingOnLoad(); 
+							hljs.tabReplace = '    ';
+						}
+					},
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

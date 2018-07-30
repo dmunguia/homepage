@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="es">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Java OO</title>
+
+		<meta name="description" content="Programación Orientada a Objetos - Java">
+		<meta name="author" content="Diego Munguía">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.min.css">
+		<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/theme/beige.css" id="theme">
+		<link rel="stylesheet" href="04-javaoo/custom.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="http://ic-itcr.ac.cr/~dmunguia/reveal.js/lib/css/googlecode.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Java OO</h1>
+					<h3>Programación Orientada a Objetos</h3>
+				</section>
+
+				<section>
+					<img src="03-oo/herencia.png">
+				</section>
+
+				<section>
+					<section>
+						<h3>clase</h3>
+						<img src="04-javaoo/rectangulo.png"/>
+						<pre><code data-trim contenteditable class="java">
+public class Rectangulo {
+	
+	private double largo;
+	private double ancho; 
+
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>visibilidad</h3>
+						<ul>
+							<li>métodos y propiedades son miembros de la clase</li>
+							<li>visibilidad: capacidad de leer o escribir el valor de una propiedad o de ejecutar un método</li>
+						</ul>
+					</section>
+					<section>
+						<h3>visibilidad</h3>
+						<ul>
+							<li><code>public</code>: visible para cualquier otra clase</li>
+							<li><code>package</code>: visible para las clases del mismo paquete al que pertenece</li>
+							<li><code>protected</code>: visible para las subclases de su clase</li>
+							<li><code>private</code>: visible sólo para los otros miembros de su clase</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class Ejemplo {
+	public int soyUnaPropiedadPublic;
+	int soyUnaPropiedadPackage;
+	protected int soyUnaPropiedadProtected;
+	private int soyUnaPropiedadPrivate;	
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>métodos</h3>
+						<p><img src="04-javaoo/rectangulo.png"/></p>
+						<pre><code data-trim contenteditable class="java">
+public class Rectangulo {
+
+	private double largo;
+	private double ancho; 
+
+	// visibilidad: public
+	// tipo de retorno: double
+	// nombre: area
+	// argumentos: ninguno
+	public double area() {
+		return largo * ancho;
+	}
+
+	public double perimetro() {
+		return (2 * largo) + (2 * ancho);
+	}
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>métodos</h3>
+						<pre><code data-trim contenteditable class="java">
+public class Ejemplo {
+
+	// visibilidad: public
+	// tipo de retorno: void (no retorna nada)
+	// nombre: saludar
+	// argumentos: nombre
+	private void saludar(String nombre) {
+		System.out.println("Hola " + nombre);
+	}
+
+	private double promediar(double valor1, double valor2,
+			double valor3) {
+		return (valor1 + valor2 + valor3) / 3;
+	}
+}
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>constructor</h3>
+						<ul>
+							<li>métodos especiales, permiten crear una nueva instancia a partir de la clase</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class Rectangulo {
+
+	private double largo;
+	private double ancho; 
+
+	public Rectangulo() {
+	// this es un miembro especial de la clase
+	// se refiere a la instancia cuyo código está en ejecución
+		this.largo = 0;
+		this.ancho = 0;
+	}
+
+	public Rectangulo(double largo, double ancho) {
+		this.largo = largo;
+		this.ancho = ancho;
+	}
+
+	// ...
+}
+						</code></pre>						
+					</section>
+
+					<section>
+						<h3>constructor</h3>
+						<ul>
+							<li>cuando no se especifica se crea un constructor vacío</li>
+							<li>puede haber más de un constructor en la misma clase</li>
+							<li>los argumentos no necesariamente tienen que coincidir con las propiedades de la clase</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class Rectangulo {
+
+	private double largo;
+	private double ancho; 
+
+	public Rectangulo(Cuadrado cuadrado) {
+		this.largo = cuadrado.getLado();
+		this.ancho = cuadrado.getLado();
+	}
+}
+						</code></pre>					
+					</section>
+
+					<section>
+						<h3>¿destructor?</h3>
+						<ul>
+							<li>en Java no existe un método para destruir una instancia de un objeto</li>
+							<li>la destrucción de objetos la realiza la máquina virtual con un algoritmo de recolección de basura (GC)</li>
+							<li>si el objeto no está siendo utilizado (referenciado) automáticamente se convierte en candidato para ser destruido por el GC</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>instanciación</h3>
+						<ul>
+							<li>al invocar un constructor se crea una nueva instancia de la clase</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class Main {
+
+	public static void main(String args[]) {
+		// se crea la instancia y se pierde por no asignarla a una variable
+		new Rectangulo(5, 6);
+
+		Rectangulo rectangulo = new Rectangulo(8, 10);
+	}
+}
+						</code></pre>					
+					</section>
+
+					<section>
+						<h3>encapsulamiento</h3>
+						<ul>
+							<li>el acceso a propiedades se realiza únicamente a través de métodos, nunca directamente</li>
+							<li>se les llama accesores de propiedades o getters y setters</li>
+							<li>estos métodos siguen una nomenclatura especial: <code>getXXX/setXXX/isXXX</code></li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>encapsulamiento</h3>
+						<pre><code data-trim contenteditable class="java">
+public class Rectangulo {
+	private double largo;
+	private double ancho;
+
+	public void setLargo(double largo) {
+		this.largo = largo;
+	}
+
+	public double getLargo() {
+		return this.largo;
+	}
+
+	public void setAncho(double nuevoAncho) {
+		ancho = nuevoAncho;
+	}
+
+	public double getAncho() {
+		return this.ancho;
+	}
+}
+						</code></pre>					
+					</section>
+
+					<section>
+						<h3>encapsulamiento</h3>
+						<pre><code data-trim contenteditable class="java">
+public class Automovil {
+	private boolean detenido;
+
+	public void setDetenido(boolean detenido) {
+		this.detenido = detenido;
+	}
+
+	public boolean isDetenido() {
+		return this.detenido;
+	}
+}
+						</code></pre>					
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>ciclo de vida de un objeto</h2>
+					</section>
+					<section>
+						<ol>
+							<li>Se carga la clase en memoria (si es la primera vez que se utiliza)</li>
+							<li>Se ejecutan los inicializadores estáticos de la clase</li>
+							<li>Se crea una nueva instancia utilizando <code>new</code></li>
+							<li>Se reserva memoria para el nuevo objeto y se crea una referencia interna al mismo</li>
+							<li>Se ejecuta cualquier código inicializador presente (bloques o variables)</li>
+							<li>Se invoca al constructor</li>
+							<li>El objeto es utilizado a través de sus métodos visibles</li>
+							<li>Cuando ningún otro código lo está utilizando se convierte en candidato a ser destruido</li>
+							<li>El garbage collector (GC) invoca al método <code>finalize()</code> (si está presente)</li>
+							<li>GC recupera la memoria asignada al objeto y elimina su referencia interna</li>
+						</ol>
+					</section>
+					<section>
+						<pre><code data-trim contenteditable class="java">
+public class Hijo extends Padre {
+
+    private double doble;
+    private long[] arreglo = new long[5];
+
+    {
+        System.out.println("Ejecutando el bloque inicializador de Hijo");
+        for (int i = 0; i < arreglo.length; i++) {
+            arreglo[i] = arreglo.length - i;
+        }
+    }
+
+    public Hijo() {
+        System.out.println("Ejecutando el constructor de Hijo");
+        this.doble = 1.0 / 3.0;
+    }
+
+    public Hijo(double doble) {
+    	this.doble = doble;
+	}
+}
+						</code></pre>					
+					</section>
+					<section>
+						<pre><code data-trim contenteditable class="java">
+public class Padre extends Abuelo {
+
+    protected byte octeto;
+    protected boolean booleano = true;
+
+    {
+        System.out.println("Ejecutando bloque inicializador de Padre");
+        booleano = !booleano;
+    }
+
+    public Padre() {
+        System.out.println("Ejecutando el constructor de Padre");
+        this.octeto = 5;
+    }
+}
+						</code></pre>					
+					</section>
+					<section>
+						<pre><code data-trim contenteditable class="java">
+public class Abuelo {
+
+    protected short enteroChico = -1;
+
+    {
+        System.out.println("Ejecutando bloque inicializador de Abuelo");
+        enteroChico = 1;
+    }
+
+    public Abuelo() {
+        System.out.println("Ejecutando el constructor de Abuelo");
+    }
+}
+						</code></pre>					
+					</section>
+					<section>
+						<pre><code data-trim contenteditable class="java">
+public class Main {
+    public static void main(String[] args) {
+        Hijo hijo = new Hijo();
+        System.out.println("hijo = " + hijo);
+    }
+}
+						</code></pre>					
+					</section>
+					<section>
+						<h3>recolector de basura (GC)</h3>
+						<ul>
+							<li>a diferencia de C y C++, en Java la administración de memoria es automática</li>
+							<li>cuando un objeto deja de ser utilizado se convierte en candidato a ser eliminado</li>
+							<li>un objeto no utilizado es considerado basura, el GC se encarga de disponer de la memoria que el objeto ocupe</li>
+							<li>un objeto deja de ser utilizado cuando ninguna variable o estructura de datos lo referencia</li>
+							<li>el GC libera y desfragmenta el espacio ocupado por todos los objetos no referenciados que encuentre al ser ejecutado</li>
+							<li>antes de eliminar un objeto el GC ejecutará el método <code>finalize()</code> en el objeto</li>
+						</ul>
+					</section>
+					<section>
+						<h3>recolector de basura (GC)</h3>
+						<ul>
+							<li>el GC es autónomo con respecto al programador</li>
+							<li>usualmente sólo se ejecuta si necesita liberar espacio para un nuevo objeto o evitar un <code>OutOfMemoryError</code></li>
+							<li>evita el problema de las referencias colgadas (<em>dangling references</em>)</li>
+							<li>la ejecución del GC consume tiempo que puede interferir con el tiempo de procesamiento de la aplicación misma, de esta forma siempre se debe reparar en el manejo eficiente de memoria a la hora de diseñar una pieza de software en Java</li>
+							<li>el GC no es garantía de que siempre vaya a haber memoria disponible, se debe hacer un buen manejo de las referencias y utilizar únicamente las estrictamente necesarias</li>
+							<li>se puede forzar la ejecución del GC utilizando <code>System.gc()</code></li>
+						</ul>
+					</section>
+					<section>
+						<pre><code data-trim contenteditable class="java">
+public class ElObjeto {
+    private String mensaje = "el tiempo pasa pronto y todo tiene su final";
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("Me fuí con las botas puestas ...");
+    }
+}
+						</code></pre>					
+					</section>
+					<section>
+						<p>el objeto no es recolectado</p>
+						<pre><code data-trim contenteditable class="java">
+public class Main {
+    public static void main(String[] args) {
+        ElObjeto elObjeto = new ElObjeto();
+        System.out.println("elObjeto.getMensaje() = " + elObjeto.getMensaje());
+        System.gc();
+    }
+}
+						</code></pre>				
+						<pre><code data-trim contenteditable class="no-highlight">
+elObjeto.getMensaje() = el tiempo pasa pronto y todo tiene su final
+
+Process finished with exit code 0
+						</code></pre>				
+					</section>
+					<section>
+						<p>el objeto si es recolectado</p>
+						<pre><code data-trim contenteditable class="java">
+public class Main {
+    public static void main(String[] args) {
+        ElObjeto elObjeto = new ElObjeto();
+        System.out.println("elObjeto.getMensaje() = " + elObjeto.getMensaje());
+        elObjeto = null;
+        System.gc();
+    }
+}
+						</code></pre>				
+						<pre><code data-trim contenteditable class="no-highlight">
+elObjeto.getMensaje() = el tiempo pasa pronto y todo tiene su final
+Me fuí con las botas puestas ...
+
+Process finished with exit code 0
+						</code></pre>				
+					</section>
+					<section>
+						<p>el objeto si es recolectado</p>
+						<pre><code data-trim contenteditable class="java">
+public class Main {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            ElObjeto elObjeto = new ElObjeto();
+            System.out.println("elObjeto.getMensaje() = " + elObjeto.getMensaje());
+        }
+    	
+        System.gc();
+    }
+}
+						</code></pre>				
+						<pre><code data-trim contenteditable class="no-highlight">
+elObjeto.getMensaje() = el tiempo pasa pronto y todo tiene su final
+Me fuí con las botas puestas ...
+
+Process finished with exit code 0
+						</code></pre>				
+					</section>
+					<section>
+						<p>el objeto no es recolectado</p>
+						<pre><code data-trim contenteditable class="java">
+public class Main {
+    public static void main(String[] args) {
+        Object[] objetos = new Object[10];
+
+        ElObjeto elObjeto = new ElObjeto();
+        System.out.println("elObjeto.getMensaje() = " + elObjeto.getMensaje());
+
+        objetos[0] = elObjeto;
+        elObjeto = null;
+
+        System.gc();
+    }
+}
+						</code></pre>				
+						<pre><code data-trim contenteditable class="no-highlight">
+elObjeto.getMensaje() = el tiempo pasa pronto y todo tiene su final
+
+Process finished with exit code 0
+						</code></pre>				
+					</section>
+					<section>
+						<p>el objeto si es recolectado</p>
+						<pre><code data-trim contenteditable class="java">
+public class Main {
+    public static void main(String[] args) {
+        Object[] objetos = new Object[10];
+
+        ElObjeto elObjeto = new ElObjeto();
+        System.out.println("elObjeto.getMensaje() = " + elObjeto.getMensaje());
+
+        objetos[0] = elObjeto;
+        elObjeto = null;
+        objetos = null;
+
+        System.gc();
+    }
+}
+						</code></pre>				
+						<pre><code data-trim contenteditable class="no-highlight">
+elObjeto.getMensaje() = el tiempo pasa pronto y todo tiene su final
+Me fuí con las botas puestas ...
+
+Process finished with exit code 0
+						</code></pre>				
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>sobrecarga y sobreescritura de métodos</h2>
+					</section>
+					<section>
+						<h3>sobrecarga (<em>overload</em>)</h3>
+						<ul>
+							<li>todo método tiene una firma (<em>signature</em>): su nombre y el número y tipo de parámetros</li>
+							<li>la firma de un método es única</li>
+							<li>dos métodos pueden tener el mismo nombre si tienen diferente firma (la diferencia recae entonces sobre el número o tipo de los parámetros)</li>
+							<li>la firma <b>no</b> incluye el tipo de retorno, la lista de excepciones, ni los nombres de los parámetros</li>
+						</ul>
+					</section>
+					<section>
+						<h3>sobrecarga (<em>overload</em>)</h3>
+						<pre><code data-trim contenteditable class="java">
+public enum Direccion {
+	DERECHA, 
+	IZQUIERDA	
+}
+						</code></pre>				
+						<pre><code data-trim contenteditable class="java">
+public class Automovil {
+	private float direccion;
+
+	public void girar(float grados) {
+		this.direccion = grados
+	}
+
+    public void girar(Direccion direccion) {
+        switch (direccion) {
+            case IZQUIERDA:
+                this.direccion += -90.0f;
+                break;
+
+            case DERECHA:
+                this.direccion += 90.0f;
+
+        }
+    }
+}
+						</code></pre>				
+					</section>
+					<section>
+						<h3>sobreescritura (<em>override</em>)</h3>
+						<ul>
+							<li>reemplazar la implementación de un método de la superclase con una implementación en la subclase</li>
+							<li>las firmas de los métodos <b>deben</b> coincidir</li>
+							<li>el método de la superclase debe ser accesible desde la subclase para poder ser sobreescrito</li>
+						</ul>
+					</section>
+					<section>
+						<h3>sobreescritura (<em>override</em>)</h3>
+						<pre><code data-trim contenteditable class="java">
+public class PoligonoRegular {
+
+    protected double lado;
+    protected int numeroLados;
+
+    public double calcularArea() {
+        return (numeroLados * (lado * lado)) / (4.0d * Math.tan(Math.toRadians(180.0d / numeroLados)));
+    }
+}
+						</code></pre>				
+						<pre><code data-trim contenteditable class="java">
+public class Cuadrado extends PoligonoRegular {
+    @Override
+    public double calcularArea() {
+        return lado * lado;
+    }
+}
+						</code></pre>				
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>propiedades y métodos de clase</h2>
+					</section>
+					<section>
+						<h3>modificador static</h3>
+						<ul>
+							<li>los miembros de una clase (métodos y propiedades) usualmente deben ser utilizados en el contexto de una instancia</li>
+							<li>puede darse el caso de que todas las instancias de una misma clase deben compartir valores</li>
+							<li>las clases pueden tener sus propios miembros, es decir, pueden haber métodos y propiedades que no requieran una instancia para ser accesados</li>
+							<li>el modificador <code>static</code> marca a un miembro como ejecutable desde la clase y no desde una instancia</li>
+						</ul>
+					</section>
+					<section>
+						<h3>propiedades static</h3>
+						<pre><code data-trim contenteditable class="java">
+public class Automovil {
+
+	// compartido por todas las instancias de Automovil
+    private static int ultimaPlaca = 1;
+
+    private int placa;
+
+    public Automovil() {
+        placa = ultimaPlaca++;
+    }
+
+    public int getPlaca() {
+        return placa;
+    }
+}
+						</code></pre>				
+					</section>
+					<section>
+						<h3>propiedades static</h3>
+						<pre><code data-trim contenteditable class="java">
+public class Main {
+    public static void main(String[] args) {
+        Automovil auto1 = new Automovil();
+        Automovil auto2 = new Automovil();
+        Automovil auto3 = new Automovil();
+
+        System.out.println("auto1.getPlaca() = " + auto1.getPlaca()); // 1
+        System.out.println("auto2.getPlaca() = " + auto2.getPlaca()); // 2
+        System.out.println("auto3.getPlaca() = " + auto3.getPlaca()); // 3
+    }
+}
+						</code></pre>				
+					</section>
+					<section>
+						<h3>métodos static</h3>
+						<ul>
+							<li>un método estático es invocado a nombre de toda la clase y no de una instancia particular</li>
+							<li>un método estático sólo puede accesar propiedades y métodos estáticos (no hay referencia a un objeto)</li>
+						</ul>
+					</section>
+					<section>
+						<h3>métodos static</h3>
+						<pre><code data-trim contenteditable class="java">
+public class Automovil {
+
+	// compartido por todas las instancias de Automovil
+    private static int ultimaPlaca = 1;
+
+    public static int obtenerSiguientePlaca() {
+    	return ultimaPlaca;
+	}
+
+    private int placa;
+
+    public Automovil() {
+        placa = ultimaPlaca++;
+    }
+
+    public int getPlaca() {
+        return placa;
+    }
+}
+						</code></pre>				
+					</section>
+					<section>
+						<h3>métodos static</h3>
+						<pre><code data-trim contenteditable class="java">
+public class Main {
+    public static void main(String[] args) {
+        Automovil auto1 = new Automovil();
+        Automovil auto2 = new Automovil();
+        Automovil auto3 = new Automovil();
+
+        System.out.println("auto1.getPlaca() = " + auto1.getPlaca()); // 1
+        System.out.println("auto2.getPlaca() = " + auto2.getPlaca()); // 2
+        System.out.println("auto3.getPlaca() = " + auto3.getPlaca()); // 3
+
+        int siguientePlaca = Automovil.obtenerSiguientePlaca();
+        System.out.println("siguientePlaca = " + siguientePlaca); // 4
+    }
+}
+						</code></pre>				
+					</section>
+					<section>
+						<h3>inicializadores estáticos</h3>
+						<ul>
+							<li>permite realizar inicializaciones complejas sobre las propiedades estáticas de una clase</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class Crypto {
+	private static int primos = new int[100];
+
+	static {
+		for (int i = 1; i <= 10; i++) {
+			primos[i - 1] = siguientePrimo(i * 1000);
+		}
+	}
+
+	private static siguientePrimo(int aPartirDe) {
+		// ...
+	}
+}
+						</code></pre>				
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>modificador final</h2>
+						<ul>
+							<li>puede ser utilizado con semántica diferente en clases, métodos, propiedades y variables locales</li>
+						</ul>
+					</section>
+					<section>
+						<h3>final en propiedades y variables</h3>
+						<ul>
+							<li>una variable <code>final</code> es inmutable, es decir una vez asignado su valor no podrá ser cambiado nunca más</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public static void main(String[] args) {
+    final int noMeCambies = 5;
+    noMeCambies = 6; // error
+}
+						</code></pre>				
+						<pre><code data-trim contenteditable class="java">
+public class Ejemplo {
+    private final int x = 0;
+
+    public void setX(int x) {
+        this.x = x; // error
+    }
+}
+						</code></pre>				
+					</section>
+					<section>
+						<h3>constantes</h3>
+						<ul>
+							<li>es una buena práctica encapsular los valores constantes, en vez de utilizarlos literalmente en diferentes lugares del código</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class Circulo {
+    private static final double PI = 3.14d;
+
+    private double radio;
+
+    public double calcularArea() {
+        return PI * radio * radio;
+    }
+
+    public double calcularPerimetro() {
+        return 2.0d * PI * radio;
+    }
+}
+						</code></pre>	
+					</section>
+					<section>
+						<h3>constantes</h3>
+						<pre><code data-trim contenteditable class="java">
+package java.lang;
+
+public final class Math {
+    public static final double PI = 3.141592653589793;
+}
+						</code></pre>	
+
+						<pre><code data-trim contenteditable class="java">
+public double calcularArea() {
+    return Math.PI * radio * radio;
+}
+						</code></pre>	
+					</section>
+					<section>
+						<h3>final en métodos</h3>
+						<ul>
+							<li>un método <code>final</code> no puede ser sobreescrito</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class PoligonoRegular {
+
+    protected double lado;
+    protected int numeroLados;
+
+    public final double calcularArea() {
+        return (numeroLados * (lado * lado)) / (4.0d * Math.tan(Math.toRadians(180.0d / numeroLados)));
+    }
+}
+						</code></pre>				
+						<pre><code data-trim contenteditable class="java">
+public class Cuadrado extends PoligonoRegular {
+	// Error!!
+    @Override
+    public double calcularArea() {
+        return lado * lado;
+    }
+}
+						</code></pre>				
+					</section>
+					<section>
+						<h2>final en clases</h2>
+						<ul>
+							<li>una clase <code>final</code> no puede ser extendida</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public final class PoligonoRegular {
+
+    protected double lado;
+    protected int numeroLados;
+
+    public final double calcularArea() {
+        return (numeroLados * (lado * lado)) / (4.0d * Math.tan(Math.toRadians(180.0d / numeroLados)));
+    }
+}
+						</code></pre>				
+						<pre><code data-trim contenteditable class="java">
+// Error!!
+public class Cuadrado extends PoligonoRegular {
+    @Override
+    public double calcularArea() {
+        return lado * lado;
+    }
+}
+						</code></pre>				
+					</section>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>paquetes</h2>
+						<ul>
+							<li>definen unidades de software que pueden ser distribuidas independientemente y combinadas con otros paquetes para formar aplicaciones</li>
+							<li>pueden agrupar clases e interfaces interrelacionadas, esta agrupación puede ser guardada en un archivo (jar) y reutilizado como librería en otras aplicaciones</li>
+							<li>crean espacios de nombres para evitar conflictos de nombres</li>
+							<li>crean un dominio de protección para crear módulos independientes (visibilidad package)</li>
+						</ul>
+					</section>
+					<section>
+						<h2>paquetes</h2>
+						<pre><code data-trim contenteditable class="java">
+package ac.tec.poo.figurasgeometricas;
+
+public class Circulo {
+	// ...
+}							
+						</code></pre>				
+						<pre><code data-trim contenteditable class="java">
+package com.pintor.ui;
+
+import ac.tec.poo.figurasgeometricas.*;
+// alternativamente, el import puede ser selectivo
+import ac.tec.poo.figurasgeometricas.Circulo;
+
+public class Pintor {
+	// ...
+}							
+						</code></pre>				
+					</section>
+				</section>
+
+				<section>
+					<h3>Referencias</h3>
+					<ul>
+						<li>Arnold K., Gosling J., Holmes D., "The Java Programming Language", 3rd ed, Addison-Wesley, 2000.</li>
+					</ul>
+				</section>
+				<section>
+					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es"><img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Java OO</span> por <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/dmunguia/tec" property="cc:attributionName" rel="cc:attributionURL">Diego Munguía</a> se encuentra bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es">Licencia Creative Commons Atribución-NoComercial-CompartirIgual 3.0 Unported</a></p>
+					<p>imagen de fondo: nigel_appleton "bw coffee cup", flickr</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="http://lab.hakim.se/reveal-js/lib/js/head.min.js"></script>
+		<script src="http://lab.hakim.se/reveal-js/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'http://lab.hakim.se/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { 
+							hljs.initHighlightingOnLoad(); 
+							hljs.tabReplace = '    ';
+						}
+					},
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+
+   <head>
+      <meta charset="utf-8">
+
+      <title>Desarrollo colaborativo utilizando git flow</title>
+
+      <meta name="description" content="Desarrollo colaborativo utilizando git flow">
+      <meta name="author" content="Diego Munguía">
+
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+      <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.min.css">
+      <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/theme/default.css" id="theme">
+      <link rel="stylesheet" href="gitflow/custom.css">
+
+      <!-- For syntax highlighting -->
+      <link rel="stylesheet" href="gitflow/googlecode.css">
+
+      <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+      <script>
+         document.write( '<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+      </script>
+
+      <!--[if lt IE 9]>
+      <script src="lib/js/html5shiv.js"></script>
+      <![endif]-->
+   </head>
+
+   <body>
+
+      <div class="reveal">
+
+         <!-- Any section element inside of this container is displayed as a slide -->
+         <div class="slides">
+
+            <section>
+               <h2>Desarrollo colaborativo</h2>
+               <h2>utilizando git flow</h2>
+               <br/>
+               <br/>
+               <br/>
+               <br/>
+               <br/>
+               <p style="text-align: right;">Diego Munguía</p>
+               <p style="text-align: right;">TEC</p>
+               <p style="text-align: right;">Sede Interuniversitaria</p>
+               <p style="text-align: right;">Alajuela, Costa Rica</p>
+            </section>
+
+            <section>
+               <section>
+                  <h2>git</h2>
+               </section>
+               <section>
+                  <h3>Objetivos funcionales</h3>
+                  <ul>
+                     <li>Descentralizado</li>
+                     <li>Uso eficiente de recursos de red</li>
+                     <li>Facilitar <em>branching</em> y <em>merging</em></li>
+                  </ul>
+               </section>
+               <section>
+                  <img src="gitflow/centr-decentr@2x.png" style="width: 90%;"/>
+               </section>
+               <section>
+                  <pre><code data-trim contenteditable>
+mkdir &lt;ruta-a-mi-repo&gt;
+
+cd &lt;ruta-a-mi-repo&gt;
+
+git init
+                  </code></pre>                  
+               </section>
+               <section>
+                  <pre><code data-trim contenteditable>
+git clone https://github.com/dmunguiatec/TallerGitFlow
+                  </code></pre>                  
+               </section>
+               <section>
+                  <p>Ciclo de vida de un archivo en git</p>
+                  <img src="gitflow/18333fig0201-tn.png" style="width: 90%;">
+               </section>
+               <section>
+                  <p><em>branching</em> y <em>merging</em></p>
+                  <pre><code data-trim contenteditable>
+git branch mi_nueva_rama
+
+git checkout mi_nueva_rama
+
+{aplicar cambios}
+
+git checkout master
+
+git merge mi_nueva_rama
+                  </code></pre>                  
+               </section>
+            </section>
+
+            <section>
+               <section>
+                  <h2>gitflow</h2>
+               </section>
+               <section>
+                  <p>Basado en post "A successful Git branching model" por Vincent Driessen</p>
+                  <a href="http://nvie.com/posts/a-successful-git-branching-model/">http://nvie.com/posts/a-successful-git-branching-model/</a>
+               </section>
+               <section>
+                  <img src="gitflow/main-branches@2x.png"/>
+               </section>
+               <section>
+                  <img src="gitflow/fb@2x.png"/>
+               </section>
+               <section>
+                  <img src="gitflow/release-cycle.png"/>
+               </section>
+               <section>
+                  <img src="gitflow/hotfix-branches@2x.png"/>
+               </section>
+               <section>
+                  <img src="gitflow/git-model@2x.png"/>
+               </section>
+            </section>
+         </div>
+      </div>
+
+      <script src="http://lab.hakim.se/reveal-js/lib/js/head.min.js"></script>
+      <script src="http://lab.hakim.se/reveal-js/js/reveal.min.js"></script>
+
+      <script>
+
+         // Full list of configuration options available here:
+         // https://github.com/hakimel/reveal.js#configuration
+         Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+               { src: 'reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+               { src: 'reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+               { src: 'reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+               { src: 'reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { 
+                     hljs.initHighlightingOnLoad(); 
+                     hljs.tabReplace = '    ';
+                  }
+               },
+               { src: 'reveal-js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+               { src: 'reveal-js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+               // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+               // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+            ]
+         });
+
+      </script>
+
+   </body>
+</html>

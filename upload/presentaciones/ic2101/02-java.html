@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="es">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Java</title>
+
+		<meta name="description" content="Programación Orientada a Objetos - Java">
+		<meta name="author" content="Diego Munguía">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.min.css">
+		<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/theme/beige.css" id="theme">
+		<link rel="stylesheet" href="02-java/custom.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="http://ic-itcr.ac.cr/~dmunguia/reveal.js/lib/css/googlecode.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>El lenguaje de programación Java</h1>
+					<h3>Programación Orientada a Objetos</h3>
+				</section>
+
+				<section>
+					<section>
+						<h2>variables</h2>
+					</section>
+					<section>
+						<p>&lt;tipo dato&gt; &lt;identificador&gt; [= &lt;valor&gt;];</p>
+						<pre><code data-trim contenteditable>
+int miEntero = 1;
+						</code></pre>
+					</section>
+					<section>
+						<h3>tipos de datos</h3>
+						<table>
+							<tr>
+								<th><u>tipo</u></th>
+								<th><u>tamaño</u></th>
+								<th><u>default</u></th>
+								<th><u>descripción</u></th>
+							</tr>
+							<tr>
+								<td>byte</td>
+								<td>8-bit</td>
+								<th>0</th>
+								<td>entero [-128, 127]</td>
+							</tr>
+							<tr>
+								<td>short</td>
+								<td>16-bit</td>
+								<th>0</th>
+								<td>entero [-32,768, 32,767]</td>
+							</tr>
+							<tr>
+								<td>int</td>
+								<td>32-bit</td>
+								<th>0</th>
+								<td>entero [-2,147,483,648 , 2,147,483,647]</td>
+							</tr>
+							<tr>
+								<td>long</td>
+								<td>64-bit</td>
+								<th>0L</th>
+								<td>entero [-9,223,372,036,854,775,808 , 9,223,372,036,854,775,807]</td>
+							</tr>
+							<tr>
+								<td>float</td>
+								<td>32-bit</td>
+								<th>0.0f</th>
+								<td>punto flotante IEEE 754</td>
+							</tr>
+							<tr>
+								<td>double</td>
+								<td>64-bit</td>
+								<th>0.0d</th>
+								<td>punto flotante IEEE 754</td>
+							</tr>
+							<tr>
+								<td>boolean</td>
+								<td>¿1-bit?</td>
+								<th>false</th>
+								<td>acepta valores <code>true</code> y <code>false</code></td>
+							</tr>
+							<tr>
+								<td>char</td>
+								<td>16-bit</td>
+								<th>'\u0000'</th>
+								<td>caracter Unicode</td>
+							</tr>
+							<tr>
+								<td>String</td>
+								<td>indefinido</td>
+								<th>null</th>
+								<td>clase en java.lang, representa hileras de caracteres, ej: "hola mundo"</td>
+							</tr>
+						</table>
+					</section>
+
+					<section>
+						<h3>arreglos</h3>
+						<pre><code data-trim contenteditable>
+int[] miArreglo = new int[10];
+miArreglo[0] = 1;
+miArreglo[1] = 3;
+
+int[] miOtroArreglo = new int[] {2,4,6,8};
+int casillaCero = miOtroArreglo[0];
+int casillaDos = miOtroArreglo[2];
+
+String[] mensajes = new String[] {"hola", "mundo"};
+char[] noSoyUnaHilera = new char[] {'h', 'o', 'l', 'a', ' ', 'm', 'u', 'n', 'd', 'o'};
+							</code></pre>
+						<ul>
+							<li>los arreglos son de longitud fija y predeterminada</li>
+							<li>todo arreglo es un objeto</li>
+							<li>el intento de acceso fuera de sus límites produce una excepción</li>
+							<li>el intento de uso de tipos de datos incompatibles error de sintáxis</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>casting</h3>
+						<pre><code data-trim contenteditable>
+double d; float f; long l; int i; short s; byte b;
+// las siguientes asignaciones son correctas
+d = f; f = l; l = i; i = s; s = b;
+// las siguientes asignaciones NO son correctas
+f = d; l = f; i = l; s = i; b = s;
+// las siguientes asignaciones si son correctas,
+// pero el resultado puede ser afectado con una pérdida de precisión
+f = (float)d; l = (long)f; i = (int)l; s = (short)i; b = (byte)s;							
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>scope</h3>
+						<ul>
+							<li>las variables definidas en un bloque sólo son accesibles dentro del bloque mismo</li>
+							<li>esto incluye sentencias <code>for</code></li>
+						</ul>
+						<pre><code data-trim contenteditable>
+public class MainClass {
+
+  public static void main(String[] args) {
+    for (int x = 0; x < 5; x++) {
+        System.out.println(x);
+    }
+  }
+
+}						
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>scope</h3>
+						<ul>
+							<li>los bloques anidados tienen acceso a las variables definidas en los bloques superiores</li>
+						</ul>
+						<pre><code data-trim contenteditable>
+public class MainClass {
+
+  public static void main(String[] args) {
+    while (true) {
+    	int x = 5;
+        for (int y = 0; y < 3; y++) {
+            System.out.println(x);
+            System.out.println(y);
+        }
+        x++;
+    }
+  }
+
+}						
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>scope</h3>
+						<pre><code data-trim contenteditable>
+public class MainClass {
+
+  public static void main(String[] args) {
+    int externa = 1;
+
+    {
+      int interna = 2;
+      System.out.println("interna = " + interna); // 2
+      System.out.println("externa = " + externa); // 1
+    }
+
+    int interna = 3;
+    System.out.println("interna = " + interna); // 3
+    System.out.println("externa = " + externa); // 1
+  }
+
+}						
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>scope</h3>
+						<ul>
+							<li>único caso en que se puede redefinir una variable de un bloque superior</li>
+						</ul>
+						<pre><code data-trim contenteditable>
+public class UnaClase {
+  int unEntero = 5;
+
+  public void unMétodo(int x) {
+  	int unEntero = -1;
+  	System.out.println("unEntero = " + unEntero); // -1
+  	System.out.println("unEntero = " + this.unEntero); // 5
+  }
+
+}						
+						</code></pre>
+					</section>
+
+				</section>
+
+
+				<section>
+					<section>
+						<h2>operadores</h2>
+					</section>
+					<section>
+<table>
+<tr>
+<th id="h1"><u>operadores</u></th>
+<th id="h2"><u>precedencia</u></th>
+</tr>
+<tr>
+<td headers="h1">postfijos</td>
+<td headers="h2"><code><em>expr</em>++ <em>expr</em>--</code></td>
+</tr>
+<tr>
+<td headers="h1">unarios</td>
+<td headers="h2"><code>++<em>expr</em> --<em>expr</em> +<em>expr</em> -<em>expr</em> ~ !</code></td>
+</tr>
+<tr>
+<td headers="h1">multiplicativos</td>
+<td headers="h2"><code>* / %</code></td>
+</tr>
+<tr>
+<td headers="h1">aditivos</td>
+<td headers="h2"><code>+ -</code></td>
+</tr>
+<tr>
+<td headers="h1">shift</td>
+<td headers="h2"><code>&lt;&lt; &gt;&gt; &gt;&gt;&gt;</code></td>
+</tr>
+<tr>
+<td headers="h1">relacionales</td>
+<td headers="h2"><code>&lt; &gt; &lt;= &gt;= instanceof</code></td>
+</tr>
+<tr>
+<td headers="h1">igualdad</td>
+<td headers="h2"><code>== !=</code></td>
+</tr>
+<tr>
+<td headers="h1">AND bits</td>
+<td headers="h2"><code>&amp;</code></td>
+</tr>
+<tr>
+<td headers="h1">XOR bits</td>
+<td headers="h2"><code>^</code></td>
+</tr>
+<tr>
+<td headers="h1">OR bits</td>
+<td headers="h2"><code>|</code></td>
+</tr>
+<tr>
+<td headers="h1">AND lógico</td>
+<td headers="h2"><code>&amp;&amp;</code></td>
+</tr>
+<tr>
+<td headers="h1">OR lógico</td>
+<td headers="h2"><code>||</code></td>
+</tr>
+<tr>
+<td headers="h1">ternario (elvis)</td>
+<td headers="h2"><code>?:</code></td>
+</tr>
+<tr>
+<td headers="h1">asignación</td>
+<td headers="h2"><code>= += -= *= /= %= &amp;= ^= |= &lt;&lt;= &gt;&gt;= &gt;&gt;&gt;=</code></td>
+</tr>
+</table>						
+					</section>
+					<section>
+						<h3>asignación</h3>
+						<p>en Java la asignación es una expresión y por tanto se evalúa a un valor</p>
+						<pre><code data-trim contenteditable class="java">
+int miVar = 10; // miVariable tiene el valor 10
+int miOtraVar = miVar = 5; // miVar == 5 y miOtraVar == 5
+miOtraVar = (miVar = -1); // miVar == -1 y miOtraVar == -1
+						</code></pre>
+					</section>
+					<section>
+						<h3><code>++</code> y <code>--</code></h3>
+						<pre><code data-trim contenteditable class="java">
+int contador = 1;
+
+/* contador = contador + 1; */
+contador++; // contador == 2
+
+/* contador = contador + 1; */
+++contador; // contador == 3
+
+/* contador++ primero asigna y después incrementa
+	nuevoContador = contador;
+	contador = contador + 1; */
+int nuevoContador = contador++; // nuevoContador == 3 y contador == 4
+
+/* ++contador primero incrementa y luego asigna
+	contador = contador + 1;
+	nuevoContador = contador; */
+nuevoContador = ++contador; // nuevoContador == 5 y contador == 5
+						</code></pre>
+					</section>
+					<section>
+						<h3>igualdad en primitivos y objetos</h3>
+						<ul>
+							<li>los tipos de datos son primitivos</li>
+							<li>todo el que extienda de java.lang.Object es un objeto</li>
+							<li>String es un objeto</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+int A = 1;
+int B = 1;
+boolean iguales = (A == B); // iguales = true
+
+String X = new String("una hilera");
+String Y = new String("una hilera");
+iguales = (X == Y); // iguales == false
+iguales = X.equals(Y); // iguales == true
+diferente = !X.equals(Y); // diferente == false
+
+						</code></pre>
+					</section>
+					<section>
+						<h3>operador ternario</h3>
+						<p>es una simplificación de la estructura if/else</p>
+						<pre><code data-trim contenteditable class="java">
+/* forma: &lt;expr-booleana&gt; ? &lt;expr-caso-true&gt; : &lt;expr-caso-false&gt; */
+
+boolean encendido = false;
+/*
+String estado;
+if (encendido) {
+	estado = "on";
+} else {
+	estado = "off";
+}
+*/
+String estado = encendido ? "on" : "off"; // estado.equals("off") == true
+
+int numero = -5;
+int valorAbsoluto = numero &lt; 0 ? -numero : numero; // valorAbsoluto == 5
+valorAbsoluto = numero &lt; 0 ? numero * -1 : numero; // valorAbsoluto == 5
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>expresiones, sentencias y bloques</h2>
+					</section>
+					<section>
+						<h3>expresiones</h3>
+						<ul>
+							<li>se construyen a partir de operadores, variables, valores literales e invocaciones a métodos</li>
+							<li>al ser evaluadas producen un único valor</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+int suma = 1 + 1; // la expresión es suma = 1 + 1
+
+String hilera = "hola mundo";
+boolean continuar = !hilera.equals("hola"); // la expresión es !hilera.equals("hola")
+
+// debemos tener presente el requerimiento de legibilidad SIEMPRE
+double x = 1.0d, y = 2;
+double resultado = x + y / 100;
+resultado = (x + y) / 100;
+resultado = x + (y / 100);
+
+						</code></pre>
+					</section>
+					<section>
+						<h3>sentencias (statements)</h3>
+						<ul>
+							<li>corresponden a una oración en Java</li>
+							<li>conforman la unidad mínima ejecutable</li>
+							<li>toda sentencia debe terminar con un ;</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+/* sentencias válidas */
+int x = 1; // declaraciones de variables					
+x = 2; // expresiones de asignación
+x++; // cualquier uso de ++ y --
+System.out.println("hola mundo") // cualquier invocación a métodos
+new String("hola mundo"); // construcción de nuevos objetos
+/* sentencias de control de flujo */
+
+/* sentencias inválidas */
+int x = 1 // falta ;
+2500 + 5; // es una expresión no una sentencia
+						</code></pre>
+					</section>
+					<section>
+						<h3>bloques</h3>
+						<ul>
+							<li>cualquier conjunto de sentencias encerradas entre <code>{</code> y <code>}</code></li>
+							<li>aunque pueden existir por sí solos, comúnmente son utilizados como demarcadores de alcance para clases, métodos y  sentencias de control de flujo</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class App { // bloque de clase
+	public static void main(String args[]) { // bloque de método
+		int y = 100;
+		{ // bloque independiente
+			int x = 1;
+			System.out.println(x);
+		} // cierra bloque independiente
+	} // cierra bloque de método	
+} // cierra bloque de clase
+						</code></pre>						
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>control de flujo</h2>
+					</section>
+					<section>
+						<h3>condicional if/else</h3>
+						<pre><code data-trim contenteditable class="java">
+/* forma: 
+if (&lt;expr-booleana&gt;) {
+	&lt;bloque then&gt;
+}
+*/
+int miEntero = 1;
+if (miEntero > 0) {
+	System.out.println("es positivo!");
+}
+
+// agregando la cláusula else
+if (miEntero % 2 == 0) {
+	System.out.println("es par");
+} else {
+	System.out.println("es impar");
+}
+
+// evaluando más de una condición en una sola sentencia
+if (miEntero == 1) {
+	System.out.println("verdadero");
+} else if (miEntero == 0) {
+	System.out.println("falso");
+} else if (miEntero == -1) {
+	System.out.println("indefinido");
+} else {
+	System.out.println("inválido");
+}
+
+// es diferente a:
+if (miEntero == 1) {
+	System.out.println("verdadero");
+}
+if (miEntero == 0) {
+	System.out.println("falso");
+} if (miEntero == -1) {
+	System.out.println("indefinido");
+} else {
+	System.out.println("inválido");
+}
+						</code></pre>							
+					</section>
+					<section>
+						<h3>condicional switch</h3>
+						<pre><code data-trim contenteditable class="java">
+int numero = 3;
+String nombre;
+switch (numero) {
+	case 1:
+		nombre = "Domingo"; 
+		break;
+	case 2:
+		nombre = "Lunes"; break;
+	case 3: nombre = "Martes"; break;
+	case 4: nombre = "Miércoles"; break;
+	case 5: nombre = "Jueves"; break;
+	case 6: nombre = "Viernes"; break;
+	case 7: nombre = "Sábado"; break;
+}
+
+// opción default
+// a partir de Java 7 se permiten strings en case
+switch (nombre) {
+	case "Domingo": numero = 1; break;
+	case "Lunes": numero = 2; break;
+	case "Martes": numero = 3; break;
+	case "Miércoles": numero = 4; break;
+	case "Jueves": numero = 5; break;
+	case "Viernes": numero = 6; break;
+	case "Sábado": numero = 7; break;
+	default: numero = -1;
+}
+
+// números primos 1..9
+boolean primo;
+switch (numero) {
+	case 1:
+	case 2:
+	case 3:
+	case 5:
+	case 7:
+		primo = true;
+		break;
+	case 4: case 6: case 8: case 9: primo = false; break;
+}
+						</code></pre>							
+					</section>
+					<section>
+						<h3>ciclo while</h3>
+						<pre><code data-trim contenteditable class="java">
+/* forma:
+while (&lt;expr-booleana&gt;) {
+	&lt;bloque a repetir&gt;
+}						
+*/
+int contador = 0;
+while (contador &lt; 10) {
+	System.out.println(contador);
+	contador++;
+}
+
+// ciclo infinito
+while (true) {
+	System.out.println("infinito!");
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>ciclo do-while</h3>
+						<p>siempre se ejecuta por lo menos una vez</p>
+						<pre><code data-trim contenteditable class="java">
+/* forma:
+do {
+	&lt;bloque a repetir&gt;
+} while (&lt;expr-booleana&gt;);						
+*/
+int contador = 10;
+do {
+	System.out.println(contador);
+	contador++;
+} while (contador &lt; 10);
+						</code></pre>
+					</section>
+					<section>
+						<h3>ciclo for</h3>
+						<pre><code data-trim contenteditable class="java">
+/* forma:
+for (&lt;sentencia inicialización&gt; ; &lt;condición de parada&gt; ; &lt;sentencia cambio&gt;) {
+	&lt; bloque a repetir &gt;
+}
+*/
+int[] miArreglo = new int[10];
+for (int i = 0 ; i &lt; miArreglo.length ; i++) {
+	miArreglo[i] = i;
+}
+
+for (int i = 0, j = 9 ; i &lt; miArreglo.length ; i++, j--) {
+	miArreglo[i] = j;
+}
+
+for (int i = 2 ; i &lt;= 100 ; i = i + 2) {
+	System.out.println(i);
+}
+
+// ciclo infinito
+for ( ; ; ) {
+	System.out.println("infinito!");
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>ciclo for (each)</h3>
+						<pre><code data-trim contenteditable class="java">
+/* forma:
+for (&lt;declaración item&gt; : &lt;colección&gt;) {
+	&lt; bloque a repetir &gt;
+}
+*/
+int[] numeros = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+for (int elemento : numeros) {
+	System.out.println(elemento);
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3><code>break</code> y <code>continue</code></h3>
+						<pre><code data-trim contenteditable class="java">
+int[] numeros = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+int buscar = 5;
+for (int i = 0; i &lt; numeros.length; i++) {
+	if (numeros[i] == buscar) {
+		System.out.println("Encontrado en posición: " + i);
+		break;
+	}
+}
+
+int contadorPares = 0;
+for (int numero : numeros) {
+	if (numero % 2 != 0) {
+		continue;
+	}
+
+	contadorPares++;
+}
+						</code></pre>
+						<p>siempre es posible reemplazar el uso de break y continue por alguna forma más elegante</p>
+					</section>
+				</section>
+
+				<section>
+					<h3>Referencias</h3>
+					<ul>
+						<li>The Java Tutorials, "Lesson: Language Basics", disponible en: <a href="http://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html">http://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html</a> </li>
+						<li>Arnold K., Gosling J., Holmes D., "The Java Programming Language", 3rd ed, Addison-Wesley, 2000.</li>
+					</ul>
+				</section>
+				<section>
+					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es"><img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">El Lenguaje de Programación Java</span> por <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/dmunguia/tec" property="cc:attributionName" rel="cc:attributionURL">Diego Munguía</a> se encuentra bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es">Licencia Creative Commons Atribución-NoComercial-CompartirIgual 3.0 Unported</a></p>
+					<p>imagen de fondo: nigel_appleton "bw coffee cup", flickr</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="http://lab.hakim.se/reveal-js/lib/js/head.min.js"></script>
+		<script src="http://lab.hakim.se/reveal-js/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'http://lab.hakim.se/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="es">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Programación, Lenguaje y Pensamiento</title>
+
+		<meta name="description" content="Programación, Lenguaje y Pensamiento">
+		<meta name="author" content="Diego Munguía">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.min.css">
+		<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/theme/night.css" id="theme">
+      <!-- <link rel="stylesheet" href="plp/fullscreen-img.css"> -->
+		<link rel="stylesheet" href="plp/custom.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="plp/googlecode.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Programación, Lenguaje y Pensamiento</h1>
+				</section>
+
+            <section>
+               <section>
+                  <h2>Relativismo Lingüístico</h2>
+               </section>
+               <section fullscreen-img="plp/whorf.jpg"></section>
+               <section fullscreen-img="plp/hopi.jpg"></section>
+               <section fullscreen-img="plp/pormpuraaw.jpg"></section>
+               <section fullscreen-img="plp/taichi.JPG"></section>
+               <section fullscreen-img="plp/aymara.jpg"></section>
+               <section fullscreen-img="plp/piraha.jpg"></section>
+            </section>
+
+            <section>
+               <section>
+                  <h2>Programación</h2>
+               </section>
+               <section>
+                  Los diversos paradigmas de programación dan forma al modelamiento de soluciones algorítmicas.
+               </section>
+               <section>
+                  <h2>x = 1</h2>
+               </section>
+               <section>
+                  <h2>λ.x : x + 1</h2>
+               </section>
+               <section>
+                  <h2>((P → Q) ∧ P) → Q</h2>
+               </section>
+               <section>
+                  <h2>o1.msj(o2)</h2>
+               </section>
+               <section fullscreen-img="plp/origines.png"></section>
+            </section>
+
+            <section>
+               <section>
+                  <h2>Programando en otras culturas</h2>
+               </section>
+               <section>
+                  <h3>Ruby</h3>
+                  <pre>
+Stewart: Are there cultural differences that come into play?
+
+Matz: I don't think so. I designed Ruby to minimize my surprise. I was very much amazed when people around the world told me that Ruby reduced their surprise, and enhanced their joy of programming. Now I'm pretty sure that programmers' minds are alike all over the world.
+                  </pre>
+               </section>
+               <section>
+                  <h3>Ruby</h3>
+                  <pre><code data-trim contenteditable class="python">
+                     # [Python]
+                     # Verbo - Objeto
+                     print("Hola mundo!")
+                  </code></pre>
+                  <pre><code data-trim contenteditable class="ruby">
+                     # [Ruby]
+                     # Objeto - Verbo
+                     "Hola mundo!".puts
+                  </code></pre>
+               </section>
+               <section>
+                  <h3>String/Hilera</h3>
+                  <pre>
+1. a slender cord or thick thread used for binding or tying; line.
+5. a necklace consisting of a number of beads, pearls, or the like threaded or strung on a cord; strand: She wore a double string of pearls.
+
+Origin: 
+before 900;  (noun) Middle English string, streng, Old English streng;  cognate with Dutch streng, German Strang;  akin to Latin stringere  to bind; (v.) late Middle English stringen  to string a bow, derivative of the noun
+                  </pre>
+                  <pre>
+astringir.
+(Del lat. adstringĕre).
+1. tr. Dicho de una sustancia: Apretar, estrechar, contraer los tejidos orgánicos.
+2. tr. estreñir.
+3. tr. Sujetar, obligar, constreñir.                     
+                  </pre>
+                  <pre>hilera -> row, line</pre>
+               </section>
+               <section>
+                  <h3>Aimara</h3>
+                  <p>
+                     "la lengua aimara es tremendamente estructurada en su sintaxis, con una precisión casi matemática o algorítmica, sin excepciones o asimetrías."
+                  </p>
+               </section>
+               <section>
+                  <h3>Aimara</h3>
+                  <ul>
+                     <li>lógica trivalente - {debatido}</li>
+                     <li>¿condicional trivalente? - concurrencia/asincronía</li>
+                  </ul>
+               </section>
+               <section>
+                  <h3>más allá</h3>
+                  <p>“Let us change our traditional attitude to the construction of programs. Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.” ~ Donald Knut</p>
+               </section>
+               <section>
+                  <h3>más allá</h3>
+                  <ul>
+                     <li>acceso a tecnología en pueblos menos influenciados por cultura occidental</li>
+                     <li>enriquecimiento de metáforas computacionales con nuevas visiones de mundo</li>
+                  </ul>
+               </section>
+            </section>
+
+<!-- 				<section>
+					<h3>SQL</h3>
+					<pre><code data-trim contenteditable class="groovy">
+@Grab('org.hsqldb:hsqldb:2.3.2')
+import groovy.sql.*
+
+def sql = Sql.newInstance('jdbc:hsqldb:mem:sampledb', 'sa', '', 'org.hsqldb.jdbcDriver')
+
+sql.execute('insert into user values(:id, :creationDate, :username, :password)', user)
+
+sql.eachRow('select * from user') { row ->
+    println("Username = ${row.username}, Password = ${row.password}")
+}
+
+					</code></pre>
+				</section>
+ -->
+			</div>
+		</div>
+
+		<script src="http://lab.hakim.se/reveal-js/lib/js/head.min.js"></script>
+		<script src="http://lab.hakim.se/reveal-js/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+               { src: 'plp/fullscreen-img.js' },
+					{ src: 'http://lab.hakim.se/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { 
+							hljs.initHighlightingOnLoad(); 
+							hljs.tabReplace = '    ';
+						}
+					},
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

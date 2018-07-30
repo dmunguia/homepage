@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="es">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Relaciones</title>
+
+		<meta name="description" content="Programación Orientada a Objetos - Relaciones entre objetos">
+		<meta name="author" content="Diego Munguía">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.min.css">
+		<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/theme/beige.css" id="theme">
+		<link rel="stylesheet" href="04-javaoo/custom.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="http://ic-itcr.ac.cr/~dmunguia/reveal.js/lib/css/googlecode.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Relaciones</h1>
+					<h3>Programación Orientada a Objetos</h3>
+				</section>
+
+				<section>
+					<section>
+						<h1>Relaciones entre objetos</h1>
+					</section>
+					<section>
+						<h3>¿para qué?</h3>
+						<ul>
+							<li>la complejidad de un sistema de software se construye a partir de una serie de objetos interactuando entre si</li>
+							<li>rara vez se encontrará una aplicación significativa compuesta de un único objeto</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>asociaciones</h3>
+					</section>
+					<section>
+						<h3>asociaciones</h3>
+						<ul>
+							<li>una asociación se establece entre dos objetos</li>
+							<li>permite a un objeto utilizar los servicios de otro objeto</li>
+							<li>o de otra manera, denota que un objeto puede comunicarse con otro objeto</li>
+						</ul>
+						<img src="05-relaciones/asociaciones_1.png"/>
+					</section>
+					<section>
+						<h3>asociaciones</h3>
+						<ul>
+							<li>la asociación se puede nombrar con una frase verbal, tal que al leerla en conjunto con los tipos de los extremos tiene significativo dentro del contexto del modelo de objetos</li>
+							<li>la frase se puede leer de izquierda a derecha o viceversa</li>
+							<li>también puede ser nombrada con una frase nominal (denotando que la asociación constituye un posible objeto en sí misma)</li>
+						</ul>
+						<img src="05-relaciones/asociaciones_nombres.png"/>
+					</section>
+					<section>
+						<h3>asociaciones</h3>
+						<ul>
+							<li>a cada extremo se le puede especificar multiplicidad</li>
+							<li>define cuántas instancias de la clase A se pueden asociar a la clase B</li>
+						</ul>
+						<img src="05-relaciones/multiplicidad.png"/>
+					</section>
+					<section>
+						<h3>asociaciones</h3>
+						<ul>
+							<li>a cada extremo se le puede especificar un rol</li>
+							<li>identifica de manera unívoca a cada extremo de la asociación</li>
+						</ul>
+						<img src="05-relaciones/rol.png"/>
+					</section>
+					<section>
+						<h3>asociaciones</h3>
+						<ul>
+							<li>la asociación puede tener dirección</li>
+							<li>define la navegabilidad en un sólo sentido, es decir A podrá accesar a B pero B no podrá accesar a A</li>
+							<li>a menos que se especifique lo contrario, las asociaciones serán bidireccionales</li>
+						</ul>
+						<img src="05-relaciones/navegabilidad.png"/>
+					</section>
+					<section>
+						<h3>asociaciones</h3>
+						<ul>
+							<li>la asociación A a B se programa definiendo una(s) instancia(s) de B en A</li>
+						</ul>
+						<img src="05-relaciones/asociacion_impl.png"/>
+						<pre><code data-trim contenteditable class="java">
+public class Vuelo {
+	private String numero;
+	private Date fecha;
+	private Aeropuerto origen;
+	private Aeropuerto destino;
+}
+
+public class Aeropuerto {
+	private String nombre;
+	private String pais;
+	private String ciudad;
+}
+						</code></pre>							
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>agregación y composición</h3>
+					</section>
+					<section>
+						<h3>composición</h3>
+						<ul>
+							<li>indica que un objeto es parte <b>componente</b> de otro objeto <b>compuesto</b></li>
+							<li>la multiplicidad en el extremo compuesto es máximo 1</li>
+							<li>es decir el componente sólo puede estar en ese compuesto y en ningún otro compuesto</li>
+						</ul>
+						<img src="05-relaciones/composicion.png"/>
+					</section>
+					<section>
+						<img src="05-relaciones/composicion_tacita.png"/>
+					</section>
+					<section>
+						<h3>composición</h3>
+						<ul>
+							<li>se implementa agregando en cada componente una única referencia al compuesto</li>
+							<li>y opcionalmente, en el compuesto una colección de componentes</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class Directorio {
+	private String nombre;
+	private List&lt;Archivo&gt; archivos;
+}
+
+public class Archivo {
+	private String nombre;
+	private Directorio directorio;
+}
+						</code></pre>							
+					</section>
+					<section>
+						<h3>agregación</h3>
+						<ul>
+							<li>indica que un objeto <b>agregación</b> contiene a otro objeto <b>agregado</b></li>
+							<li>la multiplicidad en el extremo de la agregación puede ser &gt; 1</li>
+							<li>es decir el agregado puede estar contenido en más de una agregación a la vez</li>
+						</ul>
+						<img src="05-relaciones/agregacion.png"/>
+					</section>
+					<section>
+						<img src="05-relaciones/agregacion_tacita.png"/>
+					</section>
+					<section>
+						<h3>agregación</h3>
+						<ul>
+							<li>se implementa utilizando en la agregación una colección de agregados</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class Vuelo {
+	private String numero;
+	private Date fecha;
+	private List&lt;Pasajero&gt; pasajeros;
+}
+
+public class Pasajero {
+	private String nombre;
+	private String identificacion;
+}
+						</code></pre>							
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>dependencias</h3>
+					</section>
+					<section>
+						<h3>dependencias</h3>
+						<ul>
+							<li>es la forma más débil de relación entre dos clases</li>
+							<li>indica que una clase A depende de otra clase B porque la utiliza en algún momento</li>
+							<li>es más volátil que una asociación</li>
+						</ul>
+						<img src="05-relaciones/dependencia.png"/>
+					</section>
+					<section>
+						<h3>dependencias</h3>
+						<ul>
+							<li>se implementa cuando una instancia de la clase independiente es un parámetro o variable local dentro de un método de la clase dependiente</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class IMC {
+	public double calcular(Persona p) {
+		return p.getPeso() / (p.getAltura() * p.getAltura());
+	}
+}
+						</code></pre>							
+						<pre><code data-trim contenteditable class="java">
+public class Persona {
+	private double peso;
+	private double altura;
+
+	public double getPeso() {
+		return this.peso;
+	}
+
+	public double getAltura() {
+		return this.altura;
+	}
+}
+						</code></pre>							
+					</section>
+				</section>	
+				<section>
+					<section>
+						<h3>colecciones en java</h3>
+					</section>
+					<section>
+						<ul>
+							<li>arreglos</li>
+							<li>listas (<code>java.util.List</code>)</li>
+							<li>mapas (<code>java.util.Map</code>)</li>
+							<li>conjuntos (<code>java.util.Set</code>)</li>
+						</ul>
+					</section>
+					<section>
+						<img src="05-relaciones/collections.png">
+					</section>
+					<section>
+						<h3>collection</h3>
+						<pre><code data-trim contenteditable class="java">
+public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {
+    // Basic operations
+    int size();
+    boolean isEmpty();
+    boolean contains(Object element);
+    boolean add(E element);
+    boolean remove(Object element);
+    Iterator&lt;E&gt; iterator();
+
+    // Bulk operations
+    boolean containsAll(Collection&lt;?&gt; c);
+    boolean addAll(Collection&lt;? extends E&gt; c); 
+    boolean removeAll(Collection&lt;?&gt; c);
+    boolean retainAll(Collection&lt;?&gt; c);
+    void clear();
+
+    // Array operations
+    Object[] toArray();
+    &lt;T&gt; T[] toArray(T[] a);
+}
+						</code></pre>							
+					</section>
+					<section>
+						<h3>iteración</h3>
+						<pre><code data-trim contenteditable class="java">
+Collection&lt;String&gt; hileras = new ArrayList&lt;String&gt;();
+// List&lt;String&gt; hileras = new ArrayList&lt;String&gt;();
+for (String hilera : hileras) {
+    System.out.println(hilera);
+}
+						</code></pre>
+						<pre><code data-trim contenteditable class="java">
+public interface Iterator&lt;E&gt; {
+    boolean hasNext();
+    E next();
+    void remove(); //optional
+}
+						</code></pre>
+						<pre><code data-trim contenteditable class="java">
+Iterator&lt;String&gt; iterador = hileras.iterator();
+while (iterador.hasNext()) {
+	String hilera = iterador.next();
+    System.out.println(hilera);
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>list</h3>
+						<pre><code data-trim contenteditable class="java">
+public interface List&lt;E&gt; extends Collection&lt;E&gt; {
+    // Positional access
+    E get(int index);
+    E set(int index, E element);
+    boolean add(E element); 
+    void add(int index, E element);
+    E remove(int index);
+    boolean addAll(int index, Collection&lt;? extends E&gt; c);
+
+    // Search
+    int indexOf(Object o);
+    int lastIndexOf(Object o);
+
+    // Iteration
+    ListIterator&lt;E&gt; listIterator();
+    ListIterator&lt;E&gt; listIterator(int index);
+
+    // Range-view
+    List&lt;E&gt; subList(int from, int to);
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>iteración</h3>
+						<pre><code data-trim contenteditable class="java">
+public interface ListIterator&lt;E&gt; extends Iterator&lt;E&gt; {
+    boolean hasNext();
+    E next();
+    boolean hasPrevious();
+    E previous();
+    int nextIndex();
+    int previousIndex();
+    void remove(); //optional
+    void set(E e); //optional
+    void add(E e); //optional
+}
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>algoritmos <code>java.util.Collections</code></h3>
+						<ul>
+							<li><code>sort</code></li>
+							<li><code>shuffle</code></li>
+							<li><code>reverse</code></li>
+							<li><code>rotate</code></li>
+							<li><code>swap</code></li>
+							<li><code>replaceAll</code></li>
+							<li><code>fill</code></li>
+							<li><code>copy</code></li>
+							<li><code>binarySearch</code></li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>set</h3>
+						<pre><code data-trim contenteditable class="java">
+public interface Set&lt;E&gt; extends Collection&lt;E&gt; {
+    // Basic operations
+    int size();
+    boolean isEmpty();
+    boolean contains(Object element);
+    boolean add(E element);
+    boolean remove(Object element);
+    Iterator&lt;E&gt; iterator();
+
+    // Bulk operations
+    boolean containsAll(Collection&lt;?&gt; c);
+    boolean addAll(Collection&lt;? extends E&gt; c); // unión
+    boolean removeAll(Collection&lt;?&gt; c); // diferencia
+    boolean retainAll(Collection&lt;?&gt; c); // intersección
+    void clear();
+
+    // Array Operations
+    Object[] toArray();
+    &lt;T&gt; T[] toArray(T[] a);
+}
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>map</h3>
+						<pre><code data-trim contenteditable class="java">
+public interface Map&lt;K,V&gt; {
+
+    // Basic operations
+    V put(K key, V value);
+    V get(Object key);
+    V remove(Object key);
+    boolean containsKey(Object key);
+    boolean containsValue(Object value);
+    int size();
+    boolean isEmpty();
+
+    // Bulk operations
+    void putAll(Map&lt;? extends K, ? extends V&gt; m);
+    void clear();
+
+    // Collection Views
+    public Set&lt;K&gt; keySet();
+    public Collection&lt;V&gt; values();
+    public Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet();
+
+    // Interface for entrySet elements
+    public interface Entry {
+        K getKey();
+        V getValue();
+        V setValue(V value);
+    }
+}
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>ordenamiento</h3>
+						<ul>
+							<li>todos los tipos provistos por Java tienen un órden natural</li>
+							<li>para ordenar una colección con mis clases se debe proveer un comparador</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public interface Comparator&lt;T&gt; {
+    int compare(T o1, T o2);
+}
+						</code></pre>
+						<pre><code data-trim contenteditable class="java">
+public class Persona {
+    private String nombre;
+    private String identificacion;
+    public void getIdentificacion() {
+    	return this.identificacion;
+	}
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>ordenamiento</h3>
+						<pre><code data-trim contenteditable class="java">
+public class ComparadorPersona implements Comparator&lt;Persona&gt; {
+    int compare(Persona p1, Persona p2) {
+    	return p1.getIdentificacion().compareTo(p2.getIdentificacion());
+	}
+}
+						</code></pre>
+						<pre><code data-trim contenteditable class="java">
+List&lt;Persona&gt; personas = new ArrayList&lt;Persona&gt;();
+
+// ... llenar la lista con personas
+
+Collections.sort(personas, new ComparadorPersona());
+						</code></pre>
+					</section>
+					<section>
+						<h3>ordenamiento</h3>
+						<ul>
+							<li>opcionalmente se puede hacer que los objetos a ordenar implementen la interfaz <code>Comparable</code></li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class Persona implements Comparable&lt;Persona&gt; {
+    private String nombre;
+    private String identificacion;
+    public void getIdentificacion() {
+    	return this.identificacion;
+	}
+
+    public int compareTo(Persona persona) {
+        return this.identificacion.compareTo(persona.getIdentificacion());
+    }
+}
+						</code></pre>
+						<pre><code data-trim contenteditable class="java">
+List&lt;Persona&gt; personas = new ArrayList&lt;Persona&gt;();
+
+// ... llenar la lista con personas
+
+Collections.sort(personas);
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>diagramas de clase</h3>
+					</section>
+					<section>
+						<h3>diagramas de clase</h3>
+						<ul>
+							<li>es el componente básico del modelamiento y diseño de cualquier aplicación orientada a objetos</li>
+							<li>determina cuál será la estructura de clases que implementará el comportamiento requerido por la aplicación</li>
+							<li>está compuesto por clases y relaciones entre clases</li>
+							<li>puede ser de alto nivel cuando es producto de una etapa de modelamiento conceptual o de bajo nivel cuando es producto de una etapa de diseño</li>
+						</ul>
+					</section>
+					<section>
+						<h3>alto nivel</h3>
+						<ul>
+							<li>por lo general no incluye atributos ni métodos en las clases ni otros detalles de implementación necesarios (anotaciones, estereotipos, asociaciones con nomenclatura nominal)</li>
+						</ul>
+						<a href="05-relaciones/clases_altonivel.png"><img src="05-relaciones/clases_altonivel.png"/></a>
+					</section>
+					<section>
+						<h3>bajo nivel</h3>
+						<ul>
+							<li>incluye detalles de implementación: atributos, métodos, tipos de dato, nuevas relaciones</li>
+						</ul>
+						<a href="05-relaciones/clases_bajonivel.png"><img src="05-relaciones/clases_bajonivel.png"/></a>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Relaciones entre clases</h1>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Generalización</h3>
+					</section>
+					<section>
+						<h3>Generalización</h3>
+						<ul>
+							<li>consiste en identificar aspectos comunes de un conjunto de conceptos, dividiéndolos en: conceptos generales y conceptos especializados</li>
+							<li>permite realizar una taxonomía de conceptos</li>
+							<li>favorece la simplificación y reduce la información redundante</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Generalización</h3>
+						<ul>
+							<li>indica que una clase B es una especialización de una clase A, o que la clase A es una generalización de la clase B</li>
+							<li>las partes también son llamadas superclase y subclase, padre e hijo, clase base y clase derivada</li>
+							<li>también se le conoce como relación "es-una" (<em>"is-a"</em>) o herencia</li>
+							<li>a través de esta relación los miembros de la superclase serán automáticamente miembros de la subclase (la subclase hereda los miembros de la superclase)</li>
+						</ul>
+						<img src="05-relaciones/herencia.png"/>
+					</section>
+					<section>
+						<img src="05-relaciones/herencia_tacita.png"/>
+					</section>
+					<section>
+						<h3>Generalización</h3>
+						<ul>
+							<li>la relación se implementa entre dos clases a través de la instrucción <code>extends</code></li>
+							<li>la subclase refina a la superclase al implementar nuevos miembros o al sobreescribir métodos de la superclase</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class Vehículo {
+	
+}
+						</code></pre>
+						<pre><code data-trim contenteditable class="java">
+public class Bicicleta extends Vehículo {
+	
+}
+						</code></pre>
+						<pre><code data-trim contenteditable class="java">
+public class Automóvil extends Vehículo {
+	
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>Jerarquía de tipos</h3>
+						<ul>
+							<li>todas las instancias de una subclase también tendrán el tipo de la superclase</li>
+						</ul>
+						<img src="05-relaciones/jerarquia_tipos.png"/>
+					</section>
+					<section>
+						<h3>validación</h3>
+						<ul>
+							<li>regla del 100%: el 100% de la definición de la superclase debería aplicar también a la subclase</li>
+							<li>regla "es-un": el enunciado "La subclase <b>es una</b> superclase" tiene sentido</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Realización</h3>
+					</section>
+					<section>
+						<h3>Realización</h3>
+						<ul>
+							<li>es una relación en la que una clase realiza o implementa comportamiento especificado por otra clase</li>
+							<li>la clase que especifica el comportamiento es una construcción especial llamada interfaz</li>
+							<li>una interfaz especifica métodos pero no los implementa</li>
+							<li>una interfaz no tiene propiedades</li>
+						</ul>
+						<img src="05-relaciones/realizacion.png"/>
+					</section>
+					<section>
+						<h3>Realización</h3>
+						<ul>
+							<li>la relación se implementa entre una clase y una interfaz a través de la instrucción <code>implements</code></li>
+							<li>la clase implementa a la interfaz al proveer comportamiento para <u>cada uno</u> de los métodos especificados</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public interface FiguraGeometrica {
+	double calcularArea();
+	double calcularPerimetro();
+}
+						</code></pre>
+						<pre><code data-trim contenteditable class="java">
+public class Cuadrado implements FiguraGeometrica {
+	private double lado;
+
+	public double calcularArea() {
+		return lado * lado
+	}
+
+	public double calcularPerimetro() {
+		return 4 * lado;
+	}
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>Realización</h3>
+						<ul>
+							<li>la relación de generalización es 1 a 1 (no hay herencia múltiple)</li>
+							<li>la relación de realización es 1 a n, una clase puede implementar muchas interfaces</li>
+						</ul>
+						<img src="05-relaciones/realizacion_multiple.png"/>
+					</section>
+					<section>
+						<h3>Realización</h3>
+						<pre><code data-trim contenteditable class="java">
+public class Cuadrado implements FiguraGeometrica, Comparable&lt;Cuadrado&gt; {
+	private double lado;
+
+	public double calcularArea() {
+		return lado * lado
+	}
+
+	public double calcularPerimetro() {
+		return 4 * lado;
+	}
+
+	public int compareTo(Cuadrado c) {
+		return new Double(lado).compareTo(c.getLado());
+	}
+}
+						</code></pre>
+					</section>
+					<section>
+						<h3>realización</h3>
+						<ul>
+							<li>una interfaz puede extender a otra interfaz</li>
+						</ul>
+						<img src="05-relaciones/herencia_interfaz.png"/>
+					</section>
+					<section>
+						<h3>realización</h3>
+						<ul>
+							<li>una interfaz puede extender a otra interfaz</li>
+						</ul>
+						<pre><code data-trim contenteditable class="java">
+public class Dibujable {
+	void dibujar();
+}
+						</code></pre>
+						<pre><code data-trim contenteditable class="java">
+public class FiguraGeometrica extends Dibujable {
+	double calcularArea();
+	double calcularPerimetro();
+}
+						</code></pre>
+						<pre><code data-trim contenteditable class="java">
+public class Cuadrado implements FiguraGeometrica, Comparable {
+	public void dibujar() {
+		// dibujar
+	}
+
+	public double calcularArea() {
+		// calcular
+	}
+
+	public double calcularPerimetro() {
+		// calcular
+	}
+
+	public int compareTo(Cuadrado c) {
+		// comparar
+	}
+
+}
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<h3>Referencias</h3>
+					<ul>
+						<li>Larman, C. UML y Patrones: Introducción al análisis y diseño orientado a objetos. Prentice-Hall, México, 1999.</li>
+						<li>The Java Tutorials: Collections. Disponible en [<a href="http://docs.oracle.com/javase/tutorial/collections/TOC.html">http://docs.oracle.com/javase/tutorial/collections/TOC.html]</a></li>
+					</ul>
+				</section>
+				<section>
+					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es"><img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Relaciones entre objetos</span> por <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/dmunguia/tec" property="cc:attributionName" rel="cc:attributionURL">Diego Munguía</a> se encuentra bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es">Licencia Creative Commons Atribución-NoComercial-CompartirIgual 3.0 Unported</a></p>
+					<p>imagen de fondo: nigel_appleton "bw coffee cup", flickr</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="http://lab.hakim.se/reveal-js/lib/js/head.min.js"></script>
+		<script src="http://lab.hakim.se/reveal-js/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'http://lab.hakim.se/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { 
+							hljs.initHighlightingOnLoad(); 
+							hljs.tabReplace = '    ';
+						}
+					},
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="es">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Principios de Diseño de Interfaces de Usuario</title>
+
+		<meta name="description" content="Principios de Diseño de Interfaces de Usuario">
+		<meta name="author" content="Diego Munguía">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.min.css">
+		<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/theme/night.css" id="theme">
+      <link rel="stylesheet" href="ui/fullscreen-img.css">
+		<link rel="stylesheet" href="ui/custom.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="ui/googlecode.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Principios de diseño de UI</h1>
+				</section>
+
+            <section>
+               <section>
+                  <h2>Percepción</h2>
+               </section>
+               <section>
+                  <h2>Percepción por experiencia</h2>
+                  <p>(pasado)</p>
+               </section>
+               <section fullscreen-img="ui/dalmata.jpg"></section>
+               <section>
+                  <h2>Percepción por contexto</h2>
+                  <p>(presente)</p>
+               </section>
+               <section><img src="ui/abc.png"/></section>
+               <section>
+                  <h2>Percepción por metas</h2>
+                  <p>(futuro)</p>
+               </section>
+               <section>
+                  <iframe width="854" height="510" src="http://www.youtube.com/embed/vJG698U2Mvo" frameborder="0" allowfullscreen></iframe>                  
+               </section>
+               <section>
+                  <h2>Recomendaciones de diseño</h2>
+               </section>
+               <section>
+                  <h2>Evitar ambigüedad</h2>
+               </section>
+               <section fullscreen-img="ui/ambiguedad.jpg"></section>
+               <section>
+                  <h2>Mantener la consistencia</h2>
+               </section>
+               <section>
+                  <img src="ui/consistencia1.png"/>
+                  <img src="ui/consistencia2.png"/>
+               </section>
+               <section>
+                  <h2>Tener siempre presente las metas del usuario</h2>
+               </section>
+            </section>
+
+            <section>
+               <section>
+                  <h2>Visión y estructura</h2>
+                  <p>La visión impone estructura a la entrada visual, está "programada" para percibir formas o figuras más que líneas desconectadas</p>
+                  <p>(gestalt)</p>
+               </section>
+               <section>
+                  <h2>proximidad</h2>
+               </section>
+               <section>
+                  <img src="ui/gestalt_proximidad.jpg"/>
+                  <img style="background-color:white;" src="ui/ui_proximidad.png"/>
+               </section>                  
+               <section>
+                  <h2>similaridad</h2>
+               </section>
+               <section>
+                  <img src="ui/gestalt_similaridad.gif"/>
+               </section>                  
+               <section fullscreen-img="ui/ui_similaridad.jpg"></section>
+               <section>
+                  <h2>continuidad</h2>
+               </section>
+               <section fullscreen-img="ui/gestalt_continuidad.jpg"></section>
+               <section>
+                  <img src="ui/ui_continuidad.jpg"/>
+               </section>
+               <section>
+                  <h2>clausura</h2>
+               </section>                  
+               <section>
+                  <img src="ui/gestalt_closure.png"/>
+               </section>
+               <section>
+                  <img src="ui/ui_clausura.jpg"/>
+               </section>
+               <section>
+                  <h2>simetría</h2>                  
+               </section>
+               <section>
+                  <img style="background-color:white;" src="ui/gestalt_simetria.png"/>
+               </section>
+               <section>
+                  <img src="ui/ui_simetria.jpg"/>
+               </section>
+               <section>
+                  <h2>destino común</h2>                  
+               </section>
+               <section>
+                  <img src="ui/gestalt_destinocomun.gif"/>
+               </section>
+               <section>
+                  <img src="ui/ui_destinocomun.png"/>
+               </section>
+            </section>
+
+            <section>
+               <section>
+                  <h2>Lectura</h2>
+               </section>
+               <section>
+                  <ul>
+                     <li>Características visuales</li>
+                     <li>Caracteres</li>
+                     <li>Morfemas</li>
+                     <li>Palabras</li>
+                     <li>Oraciones</li>
+                     <li>Párrafos</li>
+                  </ul>
+               </section>
+               <section>
+                  <p>Libre de contexto</p>
+                  <ul>
+                     <li>libre de contexto</li>
+                     <li>abajo-hacia-arriba</li>
+                     <li>guiada por características visuales</li>
+                     <li>automático</li>
+                  </ul>
+               </section>
+               <section>
+                  <p>Dependiente de contexto</p>
+                  <ul>
+                     <li>dependiente de contexto</li>
+                     <li>arriba-hacia-abajo</li>
+                     <li>guiada por patrones de alto nivel</li>
+                     <li>consciente</li>
+                  </ul>
+               </section>
+               <section>
+                  <p>El mal diseño de información puede interferir con el proceso de lectura.</p>
+               </section>
+               <section>
+                  <h2>Vocabulario poco común</h2>
+                  <p>"Su sesión ha expirado. Por favor autentíquese nuevamente."</p>
+                  <p>"Su sesión ha expirado. Loguéese de nuevo"</p>
+               </section>
+               <section>
+                  <h2>Fuentes complicadas o poco comúnes</h2>
+                  <img src="ui/fuentes_dificiles_leer.png"/>
+               </section>
+               <section>
+                  <h2>Fuentes pequeñas</h2>
+                  <img src="ui/fuentes_pequenas.png"/>
+               </section>
+               <section>
+                  <h2>Texto sobre ruido</h2>
+               </section>
+               <section fullscreen-img="ui/texto_ruido.png"></section>
+               <section>
+                  <h2>Información oculta por repetición</h2>
+                  <img src="ui/texto_repeticion.png"/>
+               </section>
+               <section>
+                  <h2>Interferencia por alineamiento</h2>
+                  <img src="ui/texto_alineamiento.jpg"/>
+               </section>
+               <section>
+                  <p>Reducir la lectura a lo estrictamente necesario.</p>
+               </section>
+               <section>
+                  <img src="ui/mucho_texto1.gif"/>
+                  <img src="ui/mucho_texto2.png"/>
+               </section>
+            </section>
+
+            <section>
+               <section>
+                  <h2>La visión del color es limitada</h2>
+               </section>
+               <section>
+                  <p>La visión está optimizada para identificar contraste en bordes, no en brillo</p>
+               </section>
+               <section>
+                  <img src="ui/brillo_contraste.jpg" style="width: 90%;"/>
+               </section>
+               <section>
+                  <h2>Guía para uso de colores</h2>
+               </section>
+               <section>
+                  <p>Evite las diferencias sutiles de color</p>
+                  <p>Recomendación: convertir a escala de grises y comparar</p>
+                  <img src="ui/escala_grises.jpeg" style="width: 90%;"/>
+               </section>
+               <section>
+                  <p>Utilice colores diferenciables</p>
+                  <p>Células: rojo/verde, amarillo/azul, blanco/negro</p>
+               </section>
+               <section>
+                  <p>Evite pares de colores que los daltónicos no puedan distinguir</p>
+                  <p>rojo oscuro/negro</p>
+                  <p>rojo oscuro/verde oscuro</p>
+                  <p>azúl/púrpura</p>
+                  <p>verde claro/blanco</p>
+               </section>
+               <section>
+                  <img src="ui/daltonismo.jpg" style="width: 90%;"/>
+               </section>
+               <section>
+                  <img src="ui/daltonismo_ejemplo.jpg" style="width: 90%;"/>
+               </section>
+               <section>
+                  <p>Utilice el color como pista redundante</p>
+                  <img src="ui/pista_color.jpg" style="width: 90%;"/>
+               </section>
+               <section>
+                  <p>Evite los contrastes fuertes</p>
+                  <img src="ui/color_contraste.png" style="width: 90%;"/>
+               </section>
+            </section>
+
+            <section>
+               <section>
+                  <h2>La visión periférica es reducida</h2>
+               </section>
+               <section>
+                  <ul>
+                     <li>las células fotosensibles de la retina tienden a aglutinarse en el centro (fovea)</li>
+                     <li>1% de la retina maneja el 50% de la construcción de la imagen</li>
+                     <li>la periferia brinda pistas visuales sobre dónde se debería enfocar la fovea</li>
+                  </ul>
+               </section>
+               <section>
+                  <img src="ui/error_arriba.png" style="width: 90%;"/>
+               </section>
+               <section>
+                  <img src="ui/error_cerca_foco.jpg" style="width: 90%;"/>
+               </section>
+            </section>
+
+            <section>
+               <section>
+                  <h2>Atención y memoria</h2>
+               </section>
+               <section>
+                  <ul>
+                     <li>memoria largo plazo</li>
+                     <li>memoria corto plazo</li>
+                  </ul>
+               </section>
+               <section>
+                  <h3>Memoria de corto plazo</h3>
+                  <ul>
+                     <li>baja capacidad: 7&plusmn;2 elementos no relacionados</li>
+                     <li>volátil: depende de la atención</li>
+                     <li>composición: percepción y recuerdos</li>
+                  </ul>
+               </section>
+               <section>
+                  <p>Diseño y corto plazo</p>
+                  <ul>
+                     <li>modos</li>
+                     <li>búsquedas</li>
+                     <li>instrucciones</li>
+                  </ul>
+               </section>
+               <section>
+                  <p>Diseño y largo plazo</p>
+                  <ul>
+                     <li>Evitar que el usuario dependa de su memoria de largo plazo</li>
+                  </ul>                  
+               </section>
+               <section>
+                  <img src="ui/mem_largo.png" style="width: 90%;"/>
+               </section>
+               <section>
+                  <p>GOOD</p>
+                  <li>What is the first name of the person you first kissed?</li>
+                  <li>What is the last name of the teacher who gave you your first failing grade?</li>
+                  <li>What is the name of the place your wedding reception was held?</li>
+                  <li>What is the name of the first beach you visited?</li>
+               </section>
+               <section>
+                  <p>FAIR</p>
+                  <li>What was the name of your elementary / primary school?</li>
+                  <li>In what city or town does your nearest sibling live?</li>
+                  <li>What was the name of your first stuffed animal or doll or action figure?</li>
+               </section>
+               <section>
+                  <p>POOR</p>
+                  <li>What is your pet’s name?</li>
+                  <li>In what year was your father born?</li>
+                  <li>In what county where you born?</li>
+               </section>
+               <section>
+                  <p>Diseño y largo plazo</p>
+                  <ul>
+                     <li>Consistencia (ej: copy/paste)</li>
+                  </ul>                  
+               </section>
+            </section>
+            <section>
+               <section>
+                  <h2>La atención es limitada</h2>
+               </section>
+               <section>
+                  <p>Nos enfocamos en las metas y prestamos poca atención a las herramientas</p>
+                  <p>La interfaz debe requerir atención mínima</p>
+               </section>
+               <section>
+                  <p>Las ayudas externas nos permiten seguir la pista de lo que estamos haciendo</p>
+                  <img src="ui/ayuda_externa.png"/>
+               </section>
+               <section>
+                  <p>Las metas fijan nuestra atención</p>
+                  <img src="ui/meta_atencion.jpg" style="width: 60%;"/>
+               </section>
+               <section>
+                  <p>Caminos familiares</p>
+                  <p>Interfaz cajero banco vs Interfaz cajero automático</p>
+               </section>
+               <section>
+                  <p>Ciclo: meta, ejecución, evaluación</p>
+                  <img src="ui/meta_ejec_eval.png" style="width:75%;"/>
+               </section>
+               <section>
+                  <p>Después de lograr la meta olvidamos limpiar y ordenar</p>
+                  <p>Ej: dejar las luces del carro encendidas</p>
+                  <p>La interfaz debe hacer limpieza y orden automáticamente o guiar al usuario a hacerlo él mismo</p>
+               </section>
+            </section>
+            <section>
+               <section>
+                  <h2>Reconocer vs Recordar</h2>                  
+               </section>
+               <section>
+                  <img src="ui/cara_marte.jpg"/>
+               </section>
+               <section>
+                  <p>Reconocer implica un estímulo perceptivo que reactiva un camino neural anteriormente visitado.</p>
+                  <p>Recordar implica reactivar un camino neural sin ayuda de un estímulo perceptivo.</p>
+               </section>
+               <section>
+                  <h3>Implicaciones de diseño</h3>
+                  <ul>
+                     <li>"Ver y escoger" es más fácil que "recordar y escribir" (GUI -visual- vs CLI -lenguaje-)</li>
+                     <li>Utilice imágenes para transmitir ideas de funcionalidad (íconos, thumbnails)</li>
+                     <li>Entre mayor público tenga una funcionalidad más visible deberá ser</li>
+                  </ul>
+               </section>
+            </section>
+            <section>
+               <section>
+                  <h2>Realizar tareas aprendidas es fácil, solucionar problemas y calcular es difícil</h2>
+               </section>
+               <section>
+                  <p>Tareas aprendidas. No requieren de atención consciente.</p>
+                  <ul>
+                     <li>Montar bicicleta</li>
+                     <li>Cepillarse los dientes</li>
+                     <li>Utilizar un mouse para mover el puntero en pantalla</li>
+                     <li>Tomar la ruta para llegar a la universidad</li>
+                  </ul>
+               </section>
+               <section>
+                  <p>Las tareas en proceso de aprendizaje requieren de atención consciente.</p>
+                  <ul>
+                     <li>Contar de 10 a 0</li>
+                     <li>Contar de 21 a 1 utilizando únicamente los impares</li>
+                  </ul>
+               </section>
+               <section>
+                  <p>La solución de problemas y cálculos requieren de atención y memoria de corto plazo.</p>
+                  <p>En algunos casos requiere de entrenamiento técnico especializado.</p>
+               </section>
+               <section>
+                  <h3>Implicaciones en diseño de UI</h3>
+                  <ul>
+                     <li>Guíe a los usuarios hacia su meta e indique el progreso hacia la misma.</li>
+                     <li>Sea explícito y exacto. (Evite la necesidad de deducir).</li>
+                     <li>Evite que los usuarios tengan que diagnosticar problemas en el sistema.</li>
+                     <li>Minimice el número y complejidad de opciones de ajuste.</li>
+                     <li>Haga que el usuario utilice la percepción más que el cálculo (visualización de información)</li>
+                     <li>Haga del sistema algo familiar.</li>
+                     <li>Deje que la computadora haga la matemática.</li>
+                  </ul>
+               </section>
+            </section>
+
+            <section>
+               <section>
+                  <h2>Requerimientos de tiempo</h2>
+               </section>
+               <section>
+                  <h3>Tiempo de respuesta (responsiveness)</h3>
+                  <ul>
+                     <li>Cumplimiento de los requerimientos humanos de tiempo.</li>
+                     <li>Diferente de eficiencia.</li>
+                     <li>Requerimiento <b>más importante</b> en sistema interactivos</li>
+                  </ul>
+               </section>
+               <section>
+                  <p>Sistema <em>responsivo</em>:</p>
+                  <ul>
+                     <li>Indique el reconocimiento de las tareas del usuario inmediatamente (0.1s).</li>
+                     <li>Indique al usuario cuando el sistema está ocupado y cuando no.</li>
+                     <li>Permita que el usuario realice otras tareas mientras espera que termine un proceso largo (>1s).</li>
+                     <li>Permita que los usuarios cancelen procesos largos.</li>
+                     <li>Permita que los usuarios juzguen cuánto tardará una tarea en realizarse.</li>
+                  </ul>
+               </section>
+            </section>
+
+            <section>
+               <section>
+                  <h2>Resumen de principios de diseño</h2>
+               </section>
+               <section>
+                  <ol>
+                     <li>El enfoque debe estar en el usuario y sus tareas, no en la tecnología.</li>
+                     <li>Considere primero la funcionalidad, luego la apariencia.</li>
+                     <li>Adapte el diseño a la perspectiva del usuario.</li>
+                     <li>Diseñe para el caso común. (Max. usuarios o max. frecuencia)</li>
+                     <li>No complique las tareas del usuario.</li>
+                     <li>Facilite el aprendizaje.</li>
+                     <li>Provea información, no sólo datos.</li>
+                     <li>Diseñe <em>responsiveness</em>.</li>
+                     <li>Pruebe su diseño con usuarios reales, ajústelo.</li>
+
+                  </ol>
+               </section>
+            </section>
+
+		</div>
+
+		<script src="http://lab.hakim.se/reveal-js/lib/js/head.min.js"></script>
+		<script src="http://lab.hakim.se/reveal-js/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+               { src: 'ui/fullscreen-img.js' },
+					{ src: 'http://lab.hakim.se/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { 
+							hljs.initHighlightingOnLoad(); 
+							hljs.tabReplace = '    ';
+						}
+					},
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'http://lab.hakim.se/reveal-js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
